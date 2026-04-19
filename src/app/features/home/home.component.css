@@ -1,0 +1,28 @@
+/* src/app/features/home/home.component.css */
+.sidenav-container
+{
+    height: 100vh;
+}
+
+.sidenav
+{
+    width: 250px;
+    background-color: #fafafa;
+    border-right: 1px solid #e0e0e0;
+}
+
+.spacer
+{
+    flex: 1 1 auto;
+}
+
+.main-content
+{
+    padding: 20px;
+}
+
+.user-info
+{
+    font-size: 14px;
+    font-weight: 300;
+}

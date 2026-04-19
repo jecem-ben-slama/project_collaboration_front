@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav">
+        <mat-toolbar color="primary">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/projects">
+                <mat-icon matListItemIcon>assignment</mat-icon>
+                <span matListItemTitle>Projects</span>
+            </a>
+
+            <a mat-list-item routerLink="/categories" *ngIf="isAdmin">
+                <mat-icon matListItemIcon>category</mat-icon>
+                <span matListItemTitle>Manage Categories</span>
+            </a>
+
+            <a mat-list-item routerLink="/users" *ngIf="isAdmin">
+                <mat-icon matListItemIcon>people</mat-icon>
+                <span matListItemTitle>User Management</span>
+            </a>
+
+            <mat-divider></mat-divider>
+
+            <a mat-list-item (click)="onLogout()">
+                <mat-icon matListItemIcon>exit_to_app</mat-icon>
+                <span matListItemTitle>Logout</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="accent">
+            <span>Project Collaboration Portal</span>
+            <span class="spacer"></span>
+            <span class="user-info">Logged in as: {{ userEmail }}</span>
+        </mat-toolbar>
+
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

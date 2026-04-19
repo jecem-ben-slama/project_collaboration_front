@@ -2,6 +2,6 @@ export interface AuthResponse {
   token: string;
   tokenType: string;
   expiresIn: number;
-  userId: number;
+  role: string;
   email: string;
 }
