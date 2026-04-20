@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Project' : 'Create New Project' }}</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="projectForm" style="display: flex; flex-direction: column; gap: 10px; padding-top: 10px;">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Project Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="IN_PROGRESS">In Progress</mat-option>
+                <mat-option value="COMPLETED">Completed</mat-option>
+                <mat-option value="ON_HOLD">On Hold</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="projectForm.invalid" (click)="onSubmit()">
+        {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+</mat-dialog-actions>

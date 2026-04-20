@@ -32,6 +32,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryListComponent } from './features/categories/category-list/category-list.component';
 import { CategoryFormComponent } from './features/categories/category-form/category-form.component';
+import { ProjectListComponent } from './features/projects/project-list/project-list.component';
+import { ProjectFormComponent } from './features/projects/project-form/project-form.component';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { CategoryFormComponent } from './features/categories/category-form/categ
     UserListComponent,
     UserFormComponent,
     CategoryListComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    ProjectListComponent,
+    ProjectFormComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

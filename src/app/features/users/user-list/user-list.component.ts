@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../shared/models/user_model';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -53,14 +54,23 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.userService.deleteUser(id).subscribe({
-        next: () => {
-          this.users = this.users.filter((u) => u.id !== id);
-        },
-        error: (err) => console.error('Delete failed', err),
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Confirm Delete',
+        message:
+          'Are you sure you want to delete this user? This action cannot be undone.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userService
+          .deleteUser(id)
+          .subscribe(() => this.fetchUsers());
+      }
+    });
   }
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../shared/models/category_model';
 import { CategoryFormComponent } from '../category-form/category-form.component';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-category-list',
@@ -47,12 +48,22 @@ export class CategoryListComponent implements OnInit {
       if (result) this.fetchCategories();
     });
   }
-
   onDelete(id: number): void {
-    if (confirm('Delete this category?')) {
-      this.categoryService
-        .deleteCategory(id)
-        .subscribe(() => this.fetchCategories());
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Confirm Delete',
+        message:
+          'Are you sure you want to remove this category? This action cannot be undone.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.categoryService
+          .deleteCategory(id)
+          .subscribe(() => this.fetchCategories());
+      }
+    });
   }
 }

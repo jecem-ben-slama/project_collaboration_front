@@ -1,7 +1,7 @@
 import { User } from "./user_model";
 
 export interface Project {
-  id: number; // [cite: 274, 286]
+  id?: number; // [cite: 274, 286]
   name: string; // [cite: 274, 279]
   description: string; // [cite: 274, 279]
   categoryId: number; // [cite: 274, 279]
