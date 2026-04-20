@@ -1,0 +1,45 @@
+.page-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-card
+{
+    padding: 0;
+    overflow: hidden;
+}
+
+.full-width-table
+{
+    width: 100%;
+}
+
+.loader
+{
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.badge
+{
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+}
+
+.bg-primary
+{
+    background-color: #3f51b5;
+}
+
+.bg-secondary
+{
+    background-color: #757575;
+}

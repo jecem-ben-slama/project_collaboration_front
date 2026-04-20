@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -8,51 +8,43 @@ import { AuthService } from '../../../core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  // Model for the form
-  loginData = {
-    email: '',
-    password: '',
-  };
-
-  isLoading = false;
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar // Material feedback
+    private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
+
   onLogin(): void {
-    this.isLoading = true;
+    if (this.loginForm.invalid) return;
 
-    this.authService.login(this.loginData).subscribe({
+    this.loading = true;
+    this.errorMessage = null;
+
+    this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log('Login Response JSON:', JSON.stringify(response, null, 2));
-        this.isLoading = false;
-        this.snackBar.open('Login Successful!', 'Close', { duration: 3000 });
-
-        const returnUrl =
-          this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
-        const role = response.role?.toUpperCase();
-
-        if (returnUrl) {
-          this.router.navigateByUrl(returnUrl);
-        } else if (role === 'ADMIN' || role === 'EMPLOYEE') {
-          this.router.navigate(['/projects']);
+        this.loading = false;
+        // Navigation logic based on role
+        if (response.role === 'ADMIN') {
+          this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/login'], {
-            queryParams: { accessDenied: 'role' },
-          });
+          this.router.navigate(['/user']);
         }
       },
       error: (err) => {
-        this.isLoading = false;
-        this.snackBar.open('Invalid email or password', 'Retry', {
-          duration: 5000,
-        });
-        console.error('Login error:', err);
+        this.loading = false;
+        this.errorMessage = 'Invalid email or password.';
       },
     });
   }

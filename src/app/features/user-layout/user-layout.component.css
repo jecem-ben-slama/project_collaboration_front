@@ -1,0 +1,44 @@
+.user-container
+{
+    height: calc(100vh - 64px);
+}
+
+.user-sidenav
+{
+    width: 240px;
+    background-color: #fcfcfc;
+    border-right: 1px solid #eee;
+}
+
+.user-content
+{
+    padding: 24px;
+}
+
+.spacer
+{
+    flex: 1 1 auto;
+}
+
+.menu-label
+{
+    padding: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #9e9e9e;
+    text-transform: uppercase;
+}
+
+.user-info
+{
+    font-size: 0.85rem;
+    margin-right: 10px;
+}
+
+.active-link
+{
+    color: #ff4081 !important;
+    /* Accent color for users */
+    background-color: rgba(255, 64, 129, 0.05);
+    border-left: 4px solid #ff4081;
+}

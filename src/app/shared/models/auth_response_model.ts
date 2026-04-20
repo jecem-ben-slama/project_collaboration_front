@@ -4,4 +4,5 @@ export interface AuthResponse {
   expiresIn: number;
   role: string;
   email: string;
+  userId: number;
 }

@@ -16,24 +16,42 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './features/auth/login/login.component';
+import { MatTableModule } from '@angular/material/table'; // <--- Add this for the table
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
-import { HomeComponent } from './features/home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { ProjectListComponent } from './features/projects/project-list/project-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './features/auth/login/login.component';
+import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
+import { UserLayoutComponent } from './features/user-layout/user-layout.component';
+import { UserListComponent } from './features/users/user-list/user-list.component';
+import { UserFormComponent } from './features/users/user-form/user-form.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { CategoryListComponent } from './features/categories/category-list/category-list.component';
+import { CategoryFormComponent } from './features/categories/category-form/category-form.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, ProjectListComponent, CategoryListComponent],
+  declarations: [
+
+  AppComponent,
+    LoginComponent,
+    AdminLayoutComponent,
+    UserLayoutComponent,
+    UserListComponent,
+    UserFormComponent,
+    CategoryListComponent,
+    CategoryFormComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     // Material
     MatCardModule,
     MatFormFieldModule,
@@ -46,6 +64,9 @@ import { CategoryListComponent } from './features/categories/category-list/categ
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,0 +1,44 @@
+.admin-container
+{
+    height: calc(100vh - 64px);
+}
+
+.admin-sidenav
+{
+    width: 240px;
+    border-right: 1px solid #e0e0e0;
+    background-color: #fafafa;
+}
+
+.admin-content
+{
+    padding: 24px;
+}
+
+.spacer
+{
+    flex: 1 1 auto;
+}
+
+.menu-label
+{
+    padding: 16px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #757575;
+    letter-spacing: 1px;
+}
+
+.user-info
+{
+    font-size: 0.9rem;
+    margin-right: 15px;
+    opacity: 0.9;
+}
+
+.active-link
+{
+    color: #3f51b5 !important;
+    background-color: rgba(63, 81, 181, 0.1);
+    border-right: 4px solid #3f51b5;
+}

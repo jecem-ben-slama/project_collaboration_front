@@ -1,0 +1,18 @@
+.form-layout
+{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    min-width: 320px;
+}
+
+.full-width
+{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+mat-dialog-actions
+{
+    padding-bottom: 20px !important;
+}

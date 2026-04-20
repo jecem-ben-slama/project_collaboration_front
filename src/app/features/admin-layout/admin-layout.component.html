@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+    <span>Admin Panel</span>
+    <span class="spacer"></span>
+    <span class="user-info" *ngIf="adminEmail">{{ adminEmail }}</span>
+    <button mat-icon-button (click)="onLogout()" matTooltip="Logout">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="admin-container">
+    <mat-sidenav mode="side" opened class="admin-sidenav">
+        <mat-nav-list>
+            <div class="menu-label">MANAGEMENT</div>
+
+            <a mat-list-item routerLink="/admin/dashboard" routerLinkActive="active-link">
+                <mat-icon matListItemIcon>dashboard</mat-icon>
+                <span matListItemTitle>Projects</span>
+            </a>
+
+            <a mat-list-item routerLink="/admin/users" routerLinkActive="active-link">
+                <mat-icon matListItemIcon>people</mat-icon>
+                <span matListItemTitle>Users</span>
+            </a>
+
+            <a mat-list-item routerLink="/admin/categories" routerLinkActive="active-link">
+                <mat-icon matListItemIcon>category</mat-icon>
+                <span matListItemTitle>Categories</span>
+            </a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="admin-content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

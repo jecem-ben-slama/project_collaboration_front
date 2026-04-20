@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Category' : 'New Category' }}</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="categoryForm" style="padding-top: 10px;">
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Category Label</mat-label>
+            <input matInput formControlName="label" placeholder="e.g. Frontend">
+            <mat-error *ngIf="categoryForm.get('label')?.hasError('required')">Label is required</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="categoryForm.invalid" (click)="onSubmit()">
+        {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+</mat-dialog-actions>
