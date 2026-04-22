@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './core/guards/auth.guard';
-import { UserLayoutComponent } from './features/user-layout/user-layout.component';
 import { LoginComponent } from './features/auth/login/login.component';
-import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
-import { UserListComponent } from './features/users/user-list/user-list.component';
-import { CategoryListComponent } from './features/categories/category-list/category-list.component';
-import { ProjectListComponent } from './features/projects/project-list/project-list.component';
-import { TeamOverviewComponent } from './features/assignments/team-overview/team-overview.component';
-import { MyAssignmentsComponent } from './features/my-assignments/my-assignments.component';
-import { ProjectNotesComponent } from './features/project-notes/project-notes.component';
-import { ProfileComponent } from './features/profile/profile.component';
-import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './features/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
+import { AdminLayoutComponent } from './features/Admin/admin-layout/admin-layout.component';
+import { UserListComponent } from './features/Admin/users/user-list/user-list.component';
+import { ProjectListComponent } from './features/Admin/projects/project-list/project-list.component';
+import { TeamOverviewComponent } from './features/Admin/assignments/team-overview/team-overview.component';
+import { ProfileComponent } from './features/auth/profile/profile.component';
+import { CategoryListComponent } from './features/Admin/categories/category-list/category-list.component';
+import { ProjectNotesComponent } from './features/Employee/project-notes/project-notes.component';
+import { MyAssignmentsComponent } from './features/Employee/my-assignments/my-assignments.component';
+import { UserLayoutComponent } from './features/Employee/user-layout/user-layout.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

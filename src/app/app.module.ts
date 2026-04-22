@@ -25,33 +25,33 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './features/auth/login/login.component';
-import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
-import { UserLayoutComponent } from './features/user-layout/user-layout.component';
-import { UserListComponent } from './features/users/user-list/user-list.component';
-import { UserFormComponent } from './features/users/user-form/user-form.component'; 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { CategoryListComponent } from './features/categories/category-list/category-list.component';
-import { CategoryFormComponent } from './features/categories/category-form/category-form.component';
-import { ProjectListComponent } from './features/projects/project-list/project-list.component';
-import { ProjectFormComponent } from './features/projects/project-form/project-form.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { AppButtonComponent } from './shared/components/app-button/app-button.component';
-import { TeamOverviewComponent } from './features/assignments/team-overview/team-overview.component';
-import { AssignUserFormComponent } from './features/assignments/assign-user-form/assign-user-form.component';
-import { TeamDetailsDialogComponent } from './features/assignments/team-details-dialog/team-details-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MyAssignmentsComponent } from './features/my-assignments/my-assignments.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TeammatesListComponent } from './features/teammates-list/teammates-list.component';
-import { ProjectNotesComponent } from './features/project-notes/project-notes.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { ProfileComponent } from './features/profile/profile.component';
-import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './features/reset-password/reset-password.component'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AdminLayoutComponent } from './features/Admin/admin-layout/admin-layout.component';
+import { UserLayoutComponent } from './features/Employee/user-layout/user-layout.component';
+import { UserFormComponent } from './features/Admin/users/user-form/user-form.component';
+import { UserListComponent } from './features/Admin/users/user-list/user-list.component';
+import { CategoryFormComponent } from './features/Admin/categories/category-form/category-form.component';
+import { ProjectListComponent } from './features/Admin/projects/project-list/project-list.component';
+import { CategoryListComponent } from './features/Admin/categories/category-list/category-list.component';
+import { ProjectFormComponent } from './features/Admin/projects/project-form/project-form.component';
+import { TeamOverviewComponent } from './features/Admin/assignments/team-overview/team-overview.component';
+import { AssignUserFormComponent } from './features/Admin/assignments/assign-user-form/assign-user-form.component';
+import { TeamDetailsDialogComponent } from './features/Admin/assignments/team-details-dialog/team-details-dialog.component';
+import { MyAssignmentsComponent } from './features/Employee/my-assignments/my-assignments.component';
+import { TeammatesListComponent } from './features/Employee/teammates-list/teammates-list.component';
+import { ProjectNotesComponent } from './features/Employee/project-notes/project-notes.component';
+import { ProfileComponent } from './features/auth/profile/profile.component';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,9 +72,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MyAssignmentsComponent,
     TeammatesListComponent,
     ProjectNotesComponent,
-    ProfileComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
