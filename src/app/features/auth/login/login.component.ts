@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   errorMessage: string | null = null;
+  hidePassword = true;
 
   constructor(
     private fb: FormBuilder,
@@ -21,13 +22,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
+      // Ensure these match the formControlName in HTML
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onLogin(): void {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
     this.loading = true;
     this.errorMessage = null;
@@ -35,16 +40,16 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.loading = false;
-        // Navigation logic based on role
+        // Adjusted navigation to standard routes
         if (response.role === 'ADMIN') {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/projects']);
         } else {
-          this.router.navigate(['/user']);
+          this.router.navigate(['/user/projects']);
         }
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = 'Invalid email or password.';
+        this.errorMessage = err.error?.message || 'Invalid email or password.';
       },
     });
   }

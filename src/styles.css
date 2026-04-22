@@ -1,36 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-/* Error Snackbar - Floating Red Design */
+/* Custom Error SnackBar */
 .error-snackbar
 {
-    background: #f44336 !important;
-    /* Material Red 500 */
-    color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3) !important;
-    margin-top: 20px !important;
-    /* Gives it the "floating" feel from the top */
+    background-color: #f8d7da !important;
+    /* Light red background */
+    color: #721c24 !important;
+    /* Dark red text */
+    border-left: 5px solid #dc3545;
+    /* Red accent bar */
 }
 
-.error-snackbar .mat-mdc-snack-bar-label
+.error-snackbar .mat-simple-snackbar-action
 {
-    font-weight: 500;
+    color: #721c24 !important;
+    font-weight: bold;
 }
 
-.error-snackbar .mat-mdc-button
-{
-    color: white !important;
-}
-
-/* Success Snackbar - Floating Green Design */
+/* Custom Success SnackBar */
 .success-snackbar
 {
-    background: #4caf50 !important;
-    /* Material Green 500 */
-    color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
-    margin-top: 20px !important;
+    background-color: #d4edda !important;
+    /* Light green background */
+    color: #155724 !important;
+    /* Dark green text */
+    border-left: 5px solid #28a745;
+    /* Green accent bar */
+}
+
+.success-snackbar .mat-simple-snackbar-action
+{
+    color: #155724 !important;
+    font-weight: bold;
 }

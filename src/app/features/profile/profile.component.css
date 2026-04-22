@@ -1,0 +1,132 @@
+.profile-page-container
+{
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.bg-blur-circle
+{
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.glass-effect
+{
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+}
+
+.profile-card
+{
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+}
+
+.profile-header
+{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-circle
+{
+    width: 80px;
+    height: 80px;
+    background: #6366f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: white;
+}
+
+.form-sections
+{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field-box label
+{
+    display: block;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.input-wrapper
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper mat-icon
+{
+    position: absolute;
+    left: 14px;
+    color: #94a3b8;
+    font-size: 18px;
+}
+
+.input-wrapper input,
+.input-wrapper select
+{
+    width: 100%;
+    padding: 12px 12px 12px 42px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus
+{
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.save-profile-btn
+{
+    width: 100%;
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.save-profile-btn:disabled
+{
+    background: #cbd5e1;
+}
+
+select option
+{
+    color: #1e293b;
+}

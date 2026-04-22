@@ -35,4 +35,9 @@ export class AffectationService {
     // Matches the structure you tested in Postman
     return this.http.put(`${this.API_URL}/update`, payload);
   }
+  // Fetch assignments specifically for the logged-in user
+  getMyAssignments(): Observable<any[]> {
+  
+    return this.http.get<any[]>(`${this.API_URL}/my-assigned`);
+  }
 }

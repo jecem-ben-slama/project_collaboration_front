@@ -1,0 +1,303 @@
+.dashboard-container
+{
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.bg-blob
+{
+    position: fixed;
+    top: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: -1;
+}
+
+.header-main
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box
+{
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    width: 300px;
+    transition: 0.3s;
+}
+
+.search-box:focus-within
+{
+    border-color: #6366f1;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.search-box input
+{
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 8px;
+    font-size: 0.9rem;
+}
+
+.pill-group
+{
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+}
+
+.project-pill
+{
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.project-pill.active
+{
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.content-split
+{
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.glass-card
+{
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+textarea
+{
+    width: 100%;
+    height: 150px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 15px 0;
+    font-family: inherit;
+    resize: none;
+    transition: 0.2s;
+}
+
+textarea:focus
+{
+    border-color: #6366f1;
+}
+
+.button-group
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submit-btn
+{
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.submit-btn:disabled
+{
+    background: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.cancel-btn
+{
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.cancel-btn:hover
+{
+    background: #fef2f2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+.note-entry
+{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dot
+{
+    width: 12px;
+    height: 12px;
+    border: 2px solid #6366f1;
+    border-radius: 50%;
+    background: white;
+    margin-top: 5px;
+}
+
+.line
+{
+    width: 2px;
+    flex-grow: 1;
+    background: #f1f5f9;
+    margin-left: 5px;
+}
+
+.entry-content
+{
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    flex-grow: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border: 1px solid transparent;
+}
+
+.editing-highlight
+{
+    border: 2px solid #6366f1;
+    background: #f5f3ff;
+}
+
+.note-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.author
+{
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.timestamp
+{
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.content-text
+{
+    color: #475569;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.text-danger
+{
+    color: #ef4444 !important;
+}
+
+::ng-deep .success-snackbar
+{
+    background: #0f172a !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+/* ... Previous Styles ... */
+
+.locked-editor
+{
+    opacity: 0.75;
+    background: rgba(248, 250, 252, 0.6) !important;
+    border: 1.5px dashed #cbd5e1 !important;
+}
+
+.locked-editor textarea
+{
+    cursor: not-allowed;
+    background: transparent;
+    color: #94a3b8;
+}
+
+.locked-editor .submit-btn
+{
+    background: #94a3b8 !important;
+    cursor: not-allowed;
+}
+
+.lock-indicator
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.lock-indicator mat-icon
+{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #64748b;
+}
+
+/* Ensure transition smoothness */
+.glass-card.editor
+{
+    transition: all 0.3s ease;
+}
+
+/* Red-only highlighting for entries if desired */
+.note-entry
+{
+    transition: opacity 0.3s ease;
+}

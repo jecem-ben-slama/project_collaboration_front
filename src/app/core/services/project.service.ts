@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Project } from '../../shared/models/project_model';
+import { User } from '../../shared/models/user_model';
+import { AssignedUser } from '../../shared/models/project_details_model';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +57,8 @@ export class ProjectService {
     return this.http.get<any>(
       `${this.API_URL}/removeAssignment?projectId=${projectId}&userId=${userId}`
     );
+  }
+  getTeammates(projectId: number): Observable<AssignedUser[]> {
+    return this.http.get<AssignedUser[]>(`${this.API_URL}/${projectId}/teammates`);
   }
 }

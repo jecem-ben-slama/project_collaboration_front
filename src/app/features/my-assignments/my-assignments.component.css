@@ -1,0 +1,299 @@
+:host
+{
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --accent: #6366f1;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --text-dark: #0f172a;
+}
+
+.bento-wrapper
+{
+    padding: 40px;
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Background Blobs for depth */
+.bg-blob
+{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.blob-1
+{
+    background: #6366f1;
+    top: -100px;
+    right: -100px;
+}
+
+.blob-2
+{
+    background: #a855f7;
+    bottom: -100px;
+    left: -100px;
+}
+
+/* Header Styling */
+.bento-header
+{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.brand-section
+{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-circle
+{
+    width: 50px;
+    height: 50px;
+    background: var(--text-dark);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-greeting
+{
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.bento-header h1
+{
+    margin: 0;
+    font-size: 2rem;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.stat-pill
+{
+    background: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.pulse
+{
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse 2s infinite;
+}
+
+/* Grid Layout */
+.bento-grid
+{
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.bento-card
+{
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.bento-card:hover
+{
+    transform: translateY(-8px);
+    background: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Elements */
+.card-top
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.role-tag
+{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: #f1f5f9;
+}
+
+.role-tag.is-leader
+{
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-indicator
+{
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.project-title
+{
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.project-summary
+{
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+/* Card Footer/Timeline */
+.card-footer
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time-info
+{
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+.time-capsule
+{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.connector
+{
+    width: 15px;
+    height: 2px;
+    background: #cbd5e1;
+    margin: 0 8px;
+}
+
+.glass-btn
+{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--text-dark);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.glass-btn:hover
+{
+    background: var(--accent);
+    transform: scale(1.1);
+}
+
+@keyframes pulse
+{
+    0%
+    {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70%
+    {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+
+    100%
+    {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+.teammates-widget-wrapper
+{
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 16px;
+    /* Making it subtle so it doesn't overpower the card */
+    border: 1px solid rgba(226, 232, 240, 0.4);
+}
+
+/* Custom Scrollbar for the widget inside the card */
+.teammates-widget-wrapper::-webkit-scrollbar
+{
+    width: 4px;
+}
+
+.teammates-widget-wrapper::-webkit-scrollbar-thumb
+{
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.card-body
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-summary
+{
+    margin-bottom: 0 !important;
+}

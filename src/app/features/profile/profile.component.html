@@ -1,0 +1,49 @@
+<div class="profile-page-container">
+    <div class="bg-blur-circle"></div>
+
+    <div class="profile-card glass-effect" *ngIf="!isLoading">
+        <div class="profile-header">
+            <div class="avatar-circle"><mat-icon>person</mat-icon></div>
+            <h2>Account Settings</h2>
+            <p>Update your information and specialization</p>
+        </div>
+
+        <form (ngSubmit)="onUpdateProfile()" #profileForm="ngForm" class="update-form">
+            <div class="form-sections">
+                <div class="field-box">
+                    <label>Full Name</label>
+                    <div class="input-wrapper">
+                        <mat-icon>badge</mat-icon>
+                        <input type="text" [(ngModel)]="user.name" name="name" required>
+                    </div>
+                </div>
+
+                <div class="field-box">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <mat-icon>alternate_email</mat-icon>
+                        <input type="email" [(ngModel)]="user.email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="field-box">
+                    <label>New Password</label>
+                    <div class="input-wrapper">
+                        <mat-icon>lock_open</mat-icon>
+                        <input type="password" [(ngModel)]="user.password" name="password"
+                            placeholder="Leave blank to keep current">
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="save-profile-btn" [disabled]="profileForm.invalid || isSaving">
+                    <mat-spinner diameter="20" *ngIf="isSaving"></mat-spinner>
+                    <span>{{ isSaving ? 'Updating...' : 'Save Changes' }}</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

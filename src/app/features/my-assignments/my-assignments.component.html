@@ -1,0 +1,67 @@
+<div class="bento-wrapper">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <header class="bento-header">
+        <div class="brand-section">
+            <div class="logo-circle">
+                <mat-icon>terminal</mat-icon>
+            </div>
+            <div class="text-group">
+                <span class="user-greeting">Welcome back,</span>
+                <h1>Project Hub</h1>
+            </div>
+        </div>
+        <div class="stat-pill">
+            <span class="pulse"></span>
+            <strong>{{ assignments.length }}</strong> Active Engagements
+        </div>
+    </header>
+
+    <div *ngIf="isLoading" class="skeleton-grid">
+        <div class="skeleton-card" *ngFor="let i of [1,2,3]"></div>
+    </div>
+
+    <div class="bento-grid" *ngIf="!isLoading">
+        <div class="bento-card" *ngFor="let item of assignments" [ngClass]="item.project.status">
+
+            <div class="card-top">
+                <div class="role-tag" [class.is-leader]="item.teamLeader">
+                    <mat-icon>{{ item.teamLeader ? 'auto_awesome' : 'person' }}</mat-icon>
+                    {{ item.teamLeader ? 'Lead' : 'Member' }}
+                </div>
+                <span class="status-indicator">{{ item.project.status | titlecase }}</span>
+            </div>
+
+            <div class="card-body">
+                <h2 class="project-title">{{ item.project.name }}</h2>
+                <p class="project-summary">{{ item.project.description | slice:0:100 }}...</p>
+
+              
+            </div>
+
+            <div class="card-footer">
+                <div class="time-info">
+                    <div class="time-capsule">
+                        <mat-icon>event</mat-icon>
+                        <span>{{ item.startDate | date:'MMM d YYYY' }}</span>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="time-capsule">
+                        <span>{{ item.endDate | date:'MMM d YYYY' }}</span>
+                    </div>
+                </div>
+
+                <button class="glass-btn" (click)="viewTeam(item.project.id)" matTooltip="Full Team Details">
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state-bento" *ngIf="!isLoading && assignments.length === 0">
+        <div class="empty-icon">📭</div>
+        <h2>All caught up</h2>
+        <p>No active assignments assigned to your profile yet.</p>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="dialog-header"
+    style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eee;">
+    <h2 style="margin: 0; font-size: 1.2rem;">Project Teammates</h2>
+    <button mat-icon-button (click)="dialogRef.close()" *ngIf="dialogRef">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content class="teammate-list-wrapper">
+    <div *ngIf="isLoading" class="state-container" style="text-align: center; padding: 30px;">
+        <mat-spinner diameter="35" style="margin: 0 auto;"></mat-spinner>
+        <p style="margin-top: 10px; color: #64748b;">Loading team...</p>
+    </div>
+
+    <div *ngIf="!isLoading">
+        <div class="teammate-item" *ngFor="let user of teammates"
+            style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid #f8fafc;">
+            <div class="avatar"
+                style="width: 36px; height: 36px; background: #6366f1; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                {{ (user.name || user.email || 'U') | slice:0:1 | uppercase }}
+            </div>
+            <div class="details" style="flex-grow: 1;">
+                <p class="name" style="margin: 0; font-weight: 600; font-size: 0.9rem;">{{ user.name || user.email }}
+                </p>
+                <p class="role" style="margin: 0; font-size: 0.8rem; color: #64748b;">{{ user.categoryLabel || 'Member'
+                    }}</p>
+            </div>
+            <mat-icon *ngIf="user.teamLeader" style="color: #fbbf24; font-size: 20px;">stars</mat-icon>
+        </div>
+
+        <div *ngIf="teammates.length === 0" style="text-align: center; padding: 20px; color: #94a3b8;">
+            <mat-icon style="font-size: 40px; width: 40px; height: 40px;">group_off</mat-icon>
+            <p>No teammates found for this project.</p>
+        </div>
+    </div>
+</mat-dialog-content>

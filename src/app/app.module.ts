@@ -43,6 +43,15 @@ import { TeamDetailsDialogComponent } from './features/assignments/team-details-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MyAssignmentsComponent } from './features/my-assignments/my-assignments.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TeammatesListComponent } from './features/teammates-list/teammates-list.component';
+import { ProjectNotesComponent } from './features/project-notes/project-notes.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { ProfileComponent } from './features/profile/profile.component';
+import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/reset-password/reset-password.component'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +69,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     TeamOverviewComponent,
     AssignUserFormComponent,
     TeamDetailsDialogComponent,
+    MyAssignmentsComponent,
+    TeammatesListComponent,
+    ProjectNotesComponent,
+    ProfileComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +102,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
