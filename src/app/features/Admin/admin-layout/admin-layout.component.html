@@ -1,43 +1,54 @@
-<mat-toolbar color="primary">
-    <span>Admin Panel</span>
+<mat-toolbar class="admin-toolbar">
+    <div class="brand">
+        <mat-icon class="brand-icon">space_dashboard</mat-icon>
+        <span class="brand-name">ADMIN PANEL</span>
+    </div>
+
     <span class="spacer"></span>
-    <span class="user-info" *ngIf="adminEmail">{{ adminEmail }}</span>
-    <button mat-icon-button (click)="onLogout()" matTooltip="Logout">
+
+    <div class="user-info" *ngIf="adminEmail">
+        <span class="email">{{ adminEmail }}</span>
+    </div>
+
+    <button mat-stroked-button class="logout-btn" (click)="onLogout()">
         <mat-icon>logout</mat-icon>
+        <span>Logout</span>
     </button>
 </mat-toolbar>
 
 <mat-sidenav-container class="admin-container">
     <mat-sidenav mode="side" opened class="admin-sidenav">
         <mat-nav-list>
-            <div class="menu-label">MANAGEMENT</div>
+            <div class="nav-section">
+                <a mat-list-item routerLink="/admin/projects" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>folder_open</mat-icon>
+                    <span matListItemTitle>Projects</span>
+                </a>
+                <a mat-list-item routerLink="/admin/users" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>person_outline</mat-icon>
+                    <span matListItemTitle>User Directory</span>
+                </a>
+                <a mat-list-item routerLink="/admin/assignments" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>assignment_turned_in</mat-icon>
+                    <span matListItemTitle>Assignments</span>
+                </a>
+                <a mat-list-item routerLink="/admin/categories" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>list_alt</mat-icon>
+                    <span matListItemTitle>Categories</span>
+                </a>
+                <a mat-list-item routerLink="/admin/profile" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                    <span matListItemTitle>Profile</span>
+                </a>
+            </div>
 
-            <a mat-list-item routerLink="/admin/projects" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>dashboard</mat-icon>
-                <span matListItemTitle>Projects</span>
-            </a>
-
-            <a mat-list-item routerLink="/admin/users" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>people</mat-icon>
-                <span matListItemTitle>Users</span>
-            </a>
-            <a mat-list-item routerLink="/admin/assignments" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>groups</mat-icon>
-                <span matListItemTitle>Assignments</span>
-            </a>
-            <a mat-list-item routerLink="/admin/categories" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>category</mat-icon>
-                <span matListItemTitle>Categories</span>
-            </a>
-            <a mat-list-item routerLink="/admin/profile" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>account_circle</mat-icon>
-                <span matListItemTitle>Profile</span>
-            </a>
-
+          
         </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content class="admin-content">
-        <router-outlet></router-outlet>
+        <div class="main-card">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

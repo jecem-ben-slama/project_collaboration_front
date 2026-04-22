@@ -1,50 +1,88 @@
-<div class="page-header">
-    <h2>User Management</h2>
-    <button mat-raised-button color="primary" (click)="openUserForm()">
-        <mat-icon>person_add</mat-icon> Add New User
-    </button>
-</div>
-
-<mat-card class="table-card">
-    <div *ngIf="isLoading" class="loader">
-        <mat-spinner diameter="40"></mat-spinner>
-        <p>Fetching team data...</p>
+<div class="header-container">
+    <div class="title-group">
+        <span class="breadcrumb">Admin / Management</span>
+        <h1>User Management</h1>
+        <p class="subtitle">Control access levels and manage your organization's team members</p>
     </div>
 
-    <table mat-table [dataSource]="users" *ngIf="!isLoading" class="full-width-table">
+    <app-button label="Add User" icon="person_add" (btnClick)="openUserForm()" class="header-btn">
+    </app-button>
+</div>
+
+<div class="filter-toolbar">
+    <div class="search-box">
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="Search by email..." (keyup)="applySearch($event)">
+    </div>
+
+    <div class="filter-actions">
+        <mat-form-field appearance="outline" class="role-filter">
+            <mat-select placeholder="All Roles" (selectionChange)="onRoleFilter($event.value)">
+                <mat-option value="">All Roles</mat-option>
+                <mat-option value="ADMIN">Admin</mat-option>
+                <mat-option value="EMPLOYEE">Employee</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="data-surface">
+    <div class="loading-shade" *ngIf="isLoading">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" *ngIf="!isLoading">
 
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let user"> #{{user.id}} </td>
+            <td mat-cell *matCellDef="let user">
+                <span class="id-text">#{{user.id}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="full name">
+            <th mat-header-cell *matHeaderCellDef> Full Name </th>
+            <td mat-cell *matCellDef="let user">
+                <span class="user-name">{{user.name}} {{user.lastName}}</span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+            <th mat-header-cell *matHeaderCellDef> Email Address </th>
+            <td mat-cell *matCellDef="let user">
+                <span class="user-email-soft">{{user.email}}</span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <th mat-header-cell *matHeaderCellDef> Role</th>
             <td mat-cell *matCellDef="let user">
-                <span class="badge" [ngClass]="user.role === 'ADMIN' ? 'bg-primary' : 'bg-secondary'">
+                <span class="status-badge" [ngClass]="user.role.toLowerCase()">
                     {{user.role}}
                 </span>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let user">
-                <button mat-icon-button color="accent" (click)="openUserForm(user)" matTooltip="Edit">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="onDelete(user.id)" matTooltip="Delete">
-                    <mat-icon>delete</mat-icon>
-                </button>
+            <th mat-header-cell *matHeaderCellDef class="text-right"> Management </th>
+            <td mat-cell *matCellDef="let user" class="text-right">
+                <div class="action-group">
+                    <button class="icon-link edit" (click)="openUserForm(user)" matTooltip="Edit User">
+                        <mat-icon>edit_note</mat-icon>
+                    </button>
+                    <button class="icon-link delete" (click)="onDelete(user.id)" matTooltip="Remove User">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </div>
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row-hover"></tr>
     </table>
-</mat-card>
+
+    <div class="empty-state" *ngIf="!isLoading && dataSource.filteredData.length === 0">
+        <mat-icon>group_off</mat-icon>
+        <h3>No users found</h3>
+        <p>Try adjusting your search or filters.</p>
+    </div>
+</div>

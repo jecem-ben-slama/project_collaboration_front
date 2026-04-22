@@ -1,45 +1,233 @@
-.page-header
+/* Header Section */
+.header-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.breadcrumb
+{
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+    font-weight: 800;
+}
+
+.header-container h1
+{
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin: 4px 0;
+    color: #0f172a;
+}
+
+.subtitle
+{
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* --- Filter Toolbar --- */
+.filter-toolbar
 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 16px;
 }
 
-.table-card
+.search-box
 {
-    padding: 0;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0 16px;
+    flex: 1;
+    max-width: 400px;
+    height: 48px;
+    transition: border-color 0.2s;
 }
 
-.full-width-table
+.search-box mat-icon
+{
+    color: #94a3b8;
+    margin-right: 12px;
+}
+
+.search-box input
+{
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+.search-box:focus-within
+{
+    border-color: #4f46e5;
+}
+
+.role-filter
+{
+    width: 200px;
+}
+
+/* Adjust Material Field for Toolbar Height */
+::ng-deep .role-filter .mat-mdc-text-field-wrapper
+{
+    background-color: white !important;
+    height: 48px !important;
+    border-radius: 10px !important;
+}
+
+/* --- Table Surface --- */
+.data-surface
+{
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+table
 {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.loader
+th.mat-mdc-header-cell
 {
-    padding: 40px;
+    color: #94a3b8 !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    padding: 24px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+td.mat-mdc-cell
+{
+    padding: 18px 24px !important;
+}
+
+.row-hover:hover
+{
+    background-color: #fafafa !important;
+}
+
+/* --- Typography --- */
+.id-text
+{
+    font-family: 'Roboto Mono', monospace;
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.user-email-soft
+{
+    font-weight: 500;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+/* --- Role Badges --- */
+.status-badge
+{
+    display: inline-flex;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+}
+
+.status-badge.admin
+{
+    background-color: #eef2ff;
+    color: #4338ca;
+    border-color: #c7d2fe;
+}
+
+.status-badge.employee,
+.status-badge.user
+{
+    background-color: #f0f9ff;
+    color: #1a445a;
+    border-color: #475861;
+}
+
+/* --- Actions --- */
+.action-group
+{
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.icon-link
+{
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.icon-link:hover.edit
+{
+    background: #f1f5f9;
+    color: #4f46e5;
+}
+
+.icon-link:hover.delete
+{
+    background: #fff1f2;
+    color: #ef4444;
+}
+
+.text-right
+{
+    text-align: right !important;
+}
+
+/* States */
+.loading-shade
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
 
-.badge
+.empty-state
 {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: bold;
-    color: white;
+    padding: 80px 24px;
+    text-align: center;
+    color: #94a3b8;
 }
 
-.bg-primary
+.empty-state mat-icon
 {
-    background-color: #3f51b5;
-}
-
-.bg-secondary
-{
-    background-color: #757575;
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
 }

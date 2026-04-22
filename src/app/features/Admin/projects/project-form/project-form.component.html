@@ -1,33 +1,58 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Edit Project' : 'Create New Project' }}</h2>
+<div class="dialog-header">
+    <div class="title-group">
+        <mat-icon class="header-icon">{{ isEditMode ? 'edit_note' : 'add_circle_outline' }}</mat-icon>
+        <h2 mat-dialog-title>{{ isEditMode ? 'Edit Project' : 'New Project' }}</h2>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close(false)" class="close-btn">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
 
-<mat-dialog-content>
-    <form [formGroup]="projectForm" style="display: flex; flex-direction: column; gap: 10px; padding-top: 10px;">
+<mat-dialog-content class="modern-dialog-content">
+    <form [formGroup]="projectForm" class="project-form">
 
-        <mat-form-field appearance="outline">
-            <mat-label>Project Name</mat-label>
-            <input matInput formControlName="name">
-        </mat-form-field>
+        <div class="form-section">
+            <label class="input-label">Identity</label>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Project Name</mat-label>
+                <input matInput formControlName="name" placeholder="e.g. Collaboration Platform">
+                <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description" rows="3"></textarea>
-        </mat-form-field>
+        <div class="form-section">
+            <label class="input-label">Details</label>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" rows="4"
+                    placeholder="Briefly describe the project goals..."></textarea>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Status</mat-label>
-            <mat-select formControlName="status">
-                <mat-option value="IN_PROGRESS">In Progress</mat-option>
-                <mat-option value="COMPLETED">Completed</mat-option>
-                <mat-option value="ON_HOLD">On Hold</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="form-section">
+            <label class="input-label">Current Phase</label>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value="IN_PROGRESS">
+                        <span class="status-dot in-progress"></span> In Progress
+                    </mat-option>
+                    <mat-option value="COMPLETED">
+                        <span class="status-dot completed"></span> Completed
+                    </mat-option>
+                    <mat-option value="ON_HOLD">
+                        <span class="status-dot on-hold"></span> On Hold
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
     </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
-    <button mat-raised-button color="primary" [disabled]="projectForm.invalid" (click)="onSubmit()">
-        {{ isEditMode ? 'Update' : 'Create' }}
+<mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="dialogRef.close(false)" class="cancel-btn">Discard</button>
+    <button mat-flat-button class="submit-btn" [disabled]="projectForm.invalid" (click)="onSubmit()">
+        {{ isEditMode ? 'Update Project' : 'Create Project' }}
     </button>
 </mat-dialog-actions>

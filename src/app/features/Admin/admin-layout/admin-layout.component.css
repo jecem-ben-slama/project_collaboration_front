@@ -1,44 +1,127 @@
+/* Container & Background */
 .admin-container
 {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 60px);
+    background-color: #f1f5f9;
+    /* Soft Slate Gray */
 }
 
+/* Toolbar - Solid White & High Contrast */
+.admin-toolbar
+{
+    height: 60px;
+    background: #ffffff !important;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    padding: 0 24px;
+    z-index: 10;
+}
+
+.brand
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-icon
+{
+    color: #4f46e5;
+    /* Vibrant Indigo */
+}
+
+.brand-name
+{
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.user-info .email
+{
+    /* move email to far right */
+    margin-right: auto;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-right: 16px;
+    font-weight: 500;
+}
+
+.logout-btn
+{
+    margin-left: auto;
+    border-color: #e2e8f0 !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+}
+
+/* Sidenav - Sidebar Styling */
 .admin-sidenav
 {
-    width: 240px;
-    border-right: 1px solid #e0e0e0;
-    background-color: #fafafa;
+    width: 250px;
+    background-color: #ffffff !important;
+    border-right: 2px solid #e2e8f0 !important;
 }
 
+.nav-section
+{
+    padding: 8px;
+}
+
+.section-title
+{
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    padding-left: 16px;
+    margin: 16px 0 8px 0;
+}
+
+/* Nav Links */
+mat-nav-list a
+{
+    height: 48px !important;
+    border-radius: 6px !important;
+    margin: 2px 0;
+    color: #475569 !important;
+}
+
+mat-nav-list mat-icon
+{
+    color: #94a3b8;
+}
+
+/* Active State - Solid Indigo Bar */
+.active-link
+{
+    background-color: #f5f3ff !important;
+    /* Very light purple */
+    color: #4f46e5 !important;
+    font-weight: 600 !important;
+    border-left: 4px solid #4f46e5;
+    border-radius: 0 6px 6px 0 !important;
+}
+
+.active-link mat-icon
+{
+    color: #4f46e5 !important;
+}
+
+/* Main Content Wrapper */
 .admin-content
 {
     padding: 24px;
 }
 
-.spacer
+.main-card
 {
-    flex: 1 1 auto;
-}
-
-.menu-label
-{
-    padding: 16px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #757575;
-    letter-spacing: 1px;
-}
-
-.user-info
-{
-    font-size: 0.9rem;
-    margin-right: 15px;
-    opacity: 0.9;
-}
-
-.active-link
-{
-    color: #3f51b5 !important;
-    background-color: rgba(63, 81, 181, 0.1);
-    border-right: 4px solid #3f51b5;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    min-height: calc(100vh - 120px);
+    padding: 32px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

@@ -1,30 +1,47 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Edit User' : 'Add New User' }}</h2>
+<div class="custom-modal-header">
+    <div class="header-content">
+        <mat-icon class="header-icon">{{ isEditMode ? 'person_search' : 'person_add' }}</mat-icon>
+        <div class="text-group">
+            <h2>{{ isEditMode ? 'Edit User Details' : 'Create New Member' }}</h2>
+            <p>{{ isEditMode ? 'Modify account settings and permissions' : 'Set up a new collaborator for your team' }}
+            </p>
+        </div>
+    </div>
+    <button class="close-btn" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
 
-<mat-dialog-content>
+<mat-dialog-content class="enhanced-content">
     <form [formGroup]="userForm" class="form-layout">
 
+        <div class="form-section-label">Personal Information</div>
         <div class="form-row">
             <mat-form-field appearance="outline">
                 <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName" placeholder="Jecem">
+                <input matInput formControlName="firstName" placeholder="e.g. Jecem">
+                <mat-icon matSuffix>badge</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName" placeholder="Developer">
+                <input matInput formControlName="lastName" placeholder="e.g. Ben Slama">
             </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" type="email">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="name@company.com">
+            <mat-icon matSuffix>mail_outline</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width" *ngIf="!isEditMode">
             <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="password">
+            <input matInput formControlName="password" type="password" placeholder="••••••••">
+            <mat-icon matSuffix>lock_open</mat-icon>
         </mat-form-field>
 
+        <div class="form-section-label">Permissions & Workspace</div>
         <div class="form-row">
             <mat-form-field appearance="outline">
                 <mat-label>Role</mat-label>
@@ -32,24 +49,26 @@
                     <mat-option value="ADMIN">ADMIN</mat-option>
                     <mat-option value="EMPLOYEE">EMPLOYEE</mat-option>
                 </mat-select>
+                <mat-icon matSuffix>admin_panel_settings</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Department / Category</mat-label>
+                <mat-label>Department</mat-label>
                 <mat-select formControlName="categoryId">
                     <mat-option *ngFor="let cat of categories" [value]="cat.id">
                         {{ cat.label }}
                     </mat-option>
                 </mat-select>
+                <mat-icon matSuffix>workspaces</mat-icon>
             </mat-form-field>
         </div>
 
     </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <app-button [label]="isEditMode ? 'Save Changes' : 'Create User'" [disabled]="userForm.invalid"
+<mat-dialog-actions align="end" class="custom-actions">
+    <button class="cancel-link" (click)="onCancel()">Discard</button>
+    <app-button [label]="isEditMode ? 'Update Account' : 'Invite User'" [disabled]="userForm.invalid"
         (btnClick)="onSubmit()">
     </app-button>
 </mat-dialog-actions>

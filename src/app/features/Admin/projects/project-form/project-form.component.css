@@ -1,0 +1,148 @@
+/* Header & Layout Controls */
+.dialog-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.title-group
+{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon
+{
+    color: #4f46e5;
+    /* Indigo accent */
+    font-size: 24px;
+}
+
+h2[mat-dialog-title]
+{
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 850 !important;
+    /* Extra Bold */
+    font-size: 1.3rem !important;
+    color: #0f172a;
+    /* Slate 900 */
+    letter-spacing: -0.02em;
+}
+
+.close-btn
+{
+    color: #94a3b8;
+}
+
+/* Content & Sections */
+.modern-dialog-content
+{
+    padding: 24px !important;
+    max-height: 75vh;
+}
+
+.project-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-label
+{
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.full-width
+{
+    width: 100%;
+}
+
+/* Custom Status Selectors */
+.status-dot
+{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.in-progress
+{
+    background: #f59e0b;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
+}
+
+.completed
+{
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.on-hold
+{
+    background: #ef4444;
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+/* Buttons & Footer */
+.dialog-actions
+{
+    padding: 18px 24px !important;
+    border-top: 1px solid #f1f5f9;
+    justify-content: flex-end;
+    gap: 12px;
+    background: #fafafa;
+}
+
+.cancel-btn
+{
+    color: #64748b !important;
+    font-weight: 600 !important;
+}
+
+.submit-btn
+{
+    background-color: #0f172a !important;
+    /* Deep Navy */
+    color: white !important;
+    padding: 0 28px !important;
+    height: 46px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover:not(:disabled)
+{
+    background-color: #1e293b !important;
+}
+
+.submit-btn:disabled
+{
+    background-color: #e2e8f0 !important;
+    color: #94a3b8 !important;
+}
+
+/* Material Field Customizations */
+::ng-deep .mat-mdc-text-field-wrapper
+{
+    background-color: white !important;
+}
+
+::ng-deep .mat-mdc-form-field-outline
+{
+    color: #e2e8f0 !important;
+}

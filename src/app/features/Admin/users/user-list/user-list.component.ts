@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../../../core/services/user.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { User } from '../../../../shared/models/user_model';
@@ -12,9 +13,11 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  users: User[] = [];
-  displayedColumns: string[] = ['id', 'email', 'role', 'actions'];
+  // Use MatTableDataSource for built-in filtering
+  dataSource = new MatTableDataSource<User>([]);
+  displayedColumns: string[] = ['id','full name', 'email', 'role', 'actions'];
   isLoading = true;
+  selectedRole = '';
 
   constructor(
     private userService: UserService,
@@ -24,39 +27,68 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUsers();
+
+    // Custom filter predicate to handle both Search and Role Dropdown
+    this.dataSource.filterPredicate = (data: User, filter: string) => {
+      const searchTerms = JSON.parse(filter);
+      const nameMatch = data.email.toLowerCase().includes(searchTerms.search);
+      const roleMatch = searchTerms.role
+        ? data.role?.toLowerCase() === searchTerms.role.toLowerCase()
+        : true;
+      return nameMatch && roleMatch;
+    };
   }
 
   fetchUsers(): void {
     this.isLoading = true;
     this.userService.getAllUsers().subscribe({
       next: (data) => {
-        this.users = data;
+        this.dataSource.data = data;
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Failed to load users', err);
         this.isLoading = false;
+        this.notification.showError('Could not load user list');
       },
     });
   }
 
-  // This function handles opening the dialog
+  // Combines text search and role filter
+  updateFilters(searchText: string, role: string): void {
+    const filterValue = {
+      search: searchText.trim().toLowerCase(),
+      role: role,
+    };
+    this.dataSource.filter = JSON.stringify(filterValue);
+  }
+
+  applySearch(event: Event): void {
+    const searchValue = (event.target as HTMLInputElement).value;
+    this.updateFilters(searchValue, this.selectedRole);
+  }
+
+  onRoleFilter(role: string): void {
+    this.selectedRole = role;
+    // We get the current search value from the datasource filter if it exists
+    const currentSearch = this.dataSource.filter
+      ? JSON.parse(this.dataSource.filter).search
+      : '';
+    this.updateFilters(currentSearch, role);
+  }
+
   openUserForm(user?: User): void {
     const dialogRef = this.dialog.open(UserFormComponent, {
       width: '450px',
-      data: user || null, // If user is passed, it's Edit mode. If null, it's Add mode.
-      disableClose: true, // Prevents closing by clicking outside
+      data: user || null,
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // If the dialog returns 'true' (saved successfully), refresh the list
-      if (result) {
-        this.fetchUsers();
-      }
+      if (result) this.fetchUsers();
     });
   }
 
-  
   onDelete(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -67,25 +99,22 @@ export class UserListComponent implements OnInit {
       },
     });
 
-  dialogRef.afterClosed().subscribe((result) => {
-    if (result) {
-      this.userService.deleteUser(id).subscribe({
-        next: () => {
-          this.notification.showSuccess('Deleted successfully');
-          this.fetchUsers();
-        },
-        error: (err) => {
-          if (err.status === 409) {
-            // This catches your specific backend message
-            this.notification.showError(
-              err.error.message || 'Cannot delete: Item is in use.'
-            );
-          } else {
-            this.notification.showError('An unexpected error occurred.');
-          }
-        },
-      });
-    }
-  });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userService.deleteUser(id).subscribe({
+          next: () => {
+            this.notification.showSuccess('Deleted successfully');
+            this.fetchUsers();
+          },
+          error: (err) => {
+            const msg =
+              err.status === 409
+                ? err.error.message
+                : 'An unexpected error occurred.';
+            this.notification.showError(msg);
+          },
+        });
+      }
+    });
   }
 }

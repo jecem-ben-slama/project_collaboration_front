@@ -1,22 +1,139 @@
+/* BASE BUTTON */
+.app-btn
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    border: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* FULL WIDTH */
 .full-width
 {
     width: 100%;
 }
 
-.button-content
+/* ICON */
+.btn-icon
 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    font-size: 18px;
 }
 
-.btn-spinner
+/* LABEL */
+.btn-label
 {
-    margin-right: 5px;
+    white-space: nowrap;
 }
 
-.loading-text
+/* ================= COLORS ================= */
+
+/* PRIMARY */
+.app-btn.primary
 {
-    margin-left: 5px;
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.app-btn.primary:hover
+{
+    background: #1e293b;
+    transform: translateY(-1px);
+}
+
+.app-btn.primary:active
+{
+    transform: translateY(0);
+}
+
+/* ACCENT */
+.app-btn.accent
+{
+    background: #6366f1;
+    color: white;
+}
+
+.app-btn.accent:hover
+{
+    background: #4f46e5;
+}
+
+/* WARN */
+.app-btn.warn
+{
+    background: #ef4444;
+    color: white;
+}
+
+.app-btn.warn:hover
+{
+    background: #dc2626;
+}
+
+/* ================= DISABLED ================= */
+
+.app-btn:disabled
+{
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================= LOADING ================= */
+
+.app-btn.loading
+{
+    pointer-events: none;
+}
+
+/* SPINNER */
+.spinner
+{
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+/* ANIMATION */
+@keyframes spin
+{
+    to
+    {
+        transform: rotate(360deg);
+    }
+}
+
+/* ================= MICRO-INTERACTIONS ================= */
+
+/* subtle ripple effect */
+.app-btn::after
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.app-btn:hover::after
+{
+    opacity: 1;
 }

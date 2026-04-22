@@ -6,6 +6,7 @@ import { Project } from '../../../../shared/models/project_model';
 
 @Component({
   selector: 'app-project-form',
+  styleUrls: ['./project-form.component.css'],
   templateUrl: './project-form.component.html',
 })
 export class ProjectFormComponent implements OnInit {
