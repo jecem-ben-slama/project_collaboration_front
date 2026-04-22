@@ -1,49 +1,61 @@
-<div class="profile-page-container">
-    <div class="bg-blur-circle"></div>
+<div class="overview-container">
+    <div class="profile-layout" *ngIf="!isLoading">
 
-    <div class="profile-card glass-effect" *ngIf="!isLoading">
-        <div class="profile-header">
-            <div class="avatar-circle"><mat-icon>person</mat-icon></div>
-            <h2>Account Settings</h2>
-            <p>Update your information and specialization</p>
+        <div class="header-container">
+            <div class="title-group">
+                <h1>Account Settings</h1>
+                <p>Manage your personal information and security credentials</p>
+            </div>
         </div>
 
-        <form (ngSubmit)="onUpdateProfile()" #profileForm="ngForm" class="update-form">
-            <div class="form-sections">
-                <div class="field-box">
-                    <label>Full Name</label>
-                    <div class="input-wrapper">
-                        <mat-icon>badge</mat-icon>
-                        <input type="text" [(ngModel)]="user.name" name="name" required>
+        <div class="table-surface profile-form-card">
+
+            <form (ngSubmit)="onUpdateProfile()" #profileForm="ngForm" class="form-content">
+                <div class="form-section-label">Personal Identity</div>
+
+                <div class="field-grid">
+                    <div class="field-box">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <mat-icon>badge</mat-icon>
+                            <input type="text" [(ngModel)]="user.name" name="name" required
+                                placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <div class="field-box">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <mat-icon>alternate_email</mat-icon>
+                            <input type="email" [(ngModel)]="user.email" name="email" required
+                                placeholder="email@example.com">
+                        </div>
                     </div>
                 </div>
 
-                <div class="field-box">
-                    <label>Email Address</label>
-                    <div class="input-wrapper">
-                        <mat-icon>alternate_email</mat-icon>
-                        <input type="email" [(ngModel)]="user.email" name="email" required>
-                    </div>
-                </div>
+                <div class="form-section-label">Security & Access</div>
 
-                <div class="field-box">
+                <div class="field-box password-field">
                     <label>New Password</label>
                     <div class="input-wrapper">
-                        <mat-icon>lock_open</mat-icon>
+                        <mat-icon>lock_outline</mat-icon>
                         <input type="password" [(ngModel)]="user.password" name="password"
-                            placeholder="Leave blank to keep current">
+                            placeholder="Leave blank to keep current password">
                     </div>
+                    <span class="helper-text">Ensure your password is at least 8 characters long.</span>
                 </div>
 
-                
-            </div>
+                <div class="form-footer">
+                    <button type="submit" class="primary-action-btn" [disabled]="profileForm.invalid || isSaving">
+                        <mat-spinner diameter="20" color="accent" *ngIf="isSaving"></mat-spinner>
+                        <span>{{ isSaving ? 'Updating...' : 'Save Profile Changes' }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="form-footer">
-                <button type="submit" class="save-profile-btn" [disabled]="profileForm.invalid || isSaving">
-                    <mat-spinner diameter="20" *ngIf="isSaving"></mat-spinner>
-                    <span>{{ isSaving ? 'Updating...' : 'Save Changes' }}</span>
-                </button>
-            </div>
-        </form>
+    <div *ngIf="isLoading" class="loader-state">
+        <mat-spinner diameter="32"></mat-spinner>
     </div>
 </div>

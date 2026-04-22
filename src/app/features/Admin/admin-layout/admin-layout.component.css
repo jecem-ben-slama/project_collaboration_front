@@ -3,16 +3,16 @@
 {
     height: calc(100vh - 60px);
     background-color: #f1f5f9;
-    /* Soft Slate Gray */
 }
 
-/* Toolbar - Solid White & High Contrast */
+/* --- TOPBAR STYLING (Updated Alignment) --- */
 .admin-toolbar
 {
     height: 60px;
     background: #ffffff !important;
     border-bottom: 2px solid #e2e8f0;
     display: flex;
+    align-items: center;
     padding: 0 24px;
     z-index: 10;
 }
@@ -22,12 +22,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .brand-icon
 {
     color: #4f46e5;
-    /* Vibrant Indigo */
 }
 
 .brand-name
@@ -38,26 +38,35 @@
     letter-spacing: 0.5px;
 }
 
+/* Pushes everything inside to the far right */
+.user-info
+{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
 .user-info .email
 {
-    /* move email to far right */
-    margin-right: auto;
     font-size: 0.9rem;
     color: #64748b;
-    margin-right: 16px;
+    margin-right: 20px;
     font-weight: 500;
 }
 
 .logout-btn
 {
-    margin-left: auto;
     border-color: #e2e8f0 !important;
     color: #475569 !important;
     font-weight: 600 !important;
     border-radius: 6px !important;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Sidenav - Sidebar Styling */
+/* --- SIDENAV & CONTENT (Kept Original) --- */
 .admin-sidenav
 {
     width: 250px;
@@ -80,7 +89,6 @@
     margin: 16px 0 8px 0;
 }
 
-/* Nav Links */
 mat-nav-list a
 {
     height: 48px !important;
@@ -94,11 +102,10 @@ mat-nav-list mat-icon
     color: #94a3b8;
 }
 
-/* Active State - Solid Indigo Bar */
+/* Active State */
 .active-link
 {
     background-color: #f5f3ff !important;
-    /* Very light purple */
     color: #4f46e5 !important;
     font-weight: 600 !important;
     border-left: 4px solid #4f46e5;

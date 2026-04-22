@@ -1,58 +1,62 @@
-<div class="dialog-wrapper">
-    <header class="dialog-header">
-        <div class="title-area">
+<div class="custom-modal-header">
+    <div class="header-content">
+        <div class="icon-box">
+            <mat-icon>groups</mat-icon>
+        </div>
+        <div class="text-group">
             <span class="context-label">Project Team</span>
-            <h2 mat-dialog-title>{{ project.name }}</h2>
+            <h2>{{ project.name }}</h2>
         </div>
-        <button mat-icon-button (click)="dialogRef.close()" class="close-btn">
-            <mat-icon>close</mat-icon>
-        </button>
-    </header>
-
-    <mat-dialog-content class="enhanced-content">
-        <div class="team-meta">
-            <div class="meta-pill">
-                <mat-icon>groups</mat-icon>
-                <span>{{ project.assignedUsers.length }} Members</span>
-            </div>
-            <div class="meta-pill status" [ngClass]="project.status">
-                {{ project.status | titlecase }}
-            </div>
-        </div>
-
-        <div class="users-grid">
-            <div class="user-card" *ngFor="let user of project.assignedUsers" [class.is-lead]="user.teamLeader">
-                <div class="lead-indicator" *ngIf="user.teamLeader">
-                    <mat-icon>stars</mat-icon>
-                    PROJECT LEAD
-                </div>
-
-                <div class="user-avatar">
-                    <div class="avatar-placeholder">
-                        {{ (user.name || user.email) | slice:0:1 | uppercase }}
-                    </div>
-                </div>
-
-                <div class="user-info">
-                    <span class="user-name">{{ user.name || 'Anonymous User' }}</span>
-                    <span class="user-email">{{ user.email }}</span>
-                    <span class="user-role">{{ user.categoryLabel || 'Contributor' }}</span>
-                </div>
-
-                <div class="admin-actions" *ngIf="!project.readOnly">
-                    <button mat-mini-fab color="primary" (click)="onEdit(user)" matTooltip="Edit Role">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-mini-fab color="warn" (click)="onRemove(user.id)" matTooltip="Remove">
-                        <mat-icon>person_remove</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div *ngIf="project.assignedUsers.length === 0" class="empty-team">
-            <mat-icon>group_off</mat-icon>
-            <p>No collaborators assigned yet.</p>
-        </div>
-    </mat-dialog-content>
+    </div>
+    <button class="close-btn" (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
+
+<mat-dialog-content class="enhanced-content">
+    <div class="team-stats-bar">
+        <div class="stat-pill">
+            <mat-icon>badge</mat-icon>
+            <span>{{ project.assignedUsers.length }} Collaborators</span>
+        </div>
+        <div class="status-badge" [ngClass]="project.status">
+            {{ project.status.replace('_', ' ') | titlecase }}
+        </div>
+    </div>
+
+    <div class="form-section-label">Current Members</div>
+
+    <div class="members-list">
+        <div class="member-row" *ngFor="let user of project.assignedUsers" [class.lead-row]="user.teamLeader">
+
+            <div class="member-main">
+                <div class="avatar-circle">
+                    {{ (user.name || user.email) | slice:0:1 | uppercase }}
+                </div>
+
+                <div class="member-details">
+                    <div class="name-line">
+                        <span class="full-name">{{ user.name }} </span>
+                        <span class="lead-tag" *ngIf="user.teamLeader">Project Lead</span>
+                    </div>
+                    <span class="email-text">{{ user.email }}</span>
+                    <span class="category-text">{{ user.categoryLabel || 'Contributor' }}</span>
+                </div>
+            </div>
+
+            <div class="member-actions" *ngIf="!project.readOnly">
+                <button class="icon-action-btn edit" (click)="onEdit(user)" matTooltip="Edit Allocation">
+                    <mat-icon>edit_note</mat-icon>
+                </button>
+                <button class="icon-action-btn delete" (click)="onRemove(user.id)" matTooltip="Remove Member">
+                    <mat-icon>person_remove</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="project.assignedUsers.length === 0" class="empty-state-view">
+        <mat-icon>group_off</mat-icon>
+        <p>No collaborators assigned to this project.</p>
+    </div>
+</mat-dialog-content>

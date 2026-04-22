@@ -1,36 +1,47 @@
-<mat-toolbar color="accent">
-    <span>My Workspace</span>
-    <span class="spacer"></span>
-    <span class="user-info" *ngIf="userEmail">{{ userEmail }}</span>
-    <button mat-icon-button (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-    </button>
+<mat-toolbar class="admin-toolbar">
+    <div class="brand">
+        <mat-icon class="brand-icon">terminal</mat-icon>
+        <span class="brand-name">MY WORKSPACE</span>
+    </div>
+
+    <div class="user-info" *ngIf="userEmail">
+        <span class="email">{{ userEmail }}</span>
+        <button mat-stroked-button class="logout-btn" (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+        </button>
+    </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="user-container">
-    <mat-sidenav mode="side" opened class="user-sidenav">
+<mat-sidenav-container class="admin-container">
+    <mat-sidenav mode="side" opened class="admin-sidenav">
         <mat-nav-list>
-            <div class="menu-label">MY WORK</div>
+            <div class="nav-section">
+                <div class="section-title">My Work</div>
 
-            <a mat-list-item routerLink="/user/projects" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>assignment</mat-icon>
-                <span matListItemTitle>My Projects</span>
-            </a>
+                <a mat-list-item routerLink="/user/projects" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>assignment</mat-icon>
+                    <span matListItemTitle>My Projects</span>
+                </a>
 
-            <a mat-list-item routerLink="/user/notes" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>note</mat-icon>
-                <span matListItemTitle>Project Notes</span>
-            </a>
+                <a mat-list-item routerLink="/user/notes" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>history_edu</mat-icon>
+                    <span matListItemTitle>Project Notes</span>
+                </a>
 
-            <a mat-list-item routerLink="/user/profile" routerLinkActive="active-link">
-                <mat-icon matListItemIcon>account_circle</mat-icon>
-                <span matListItemTitle>Profile Settings</span>
-            </a>
+                <div class="section-title" style="margin-top: 20px;">Settings</div>
 
+                <a mat-list-item routerLink="/user/profile" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                    <span matListItemTitle>Profile Settings</span>
+                </a>
+            </div>
         </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content class="user-content">
-        <router-outlet></router-outlet>
+    <mat-sidenav-content class="admin-content">
+        <div class="main-card">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

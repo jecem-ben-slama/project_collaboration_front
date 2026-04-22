@@ -1,0 +1,132 @@
+/* --- Header Section --- */
+.custom-modal-header
+{
+    padding: 32px 32px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content
+{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icon-box
+{
+    background: #f8fafc;
+    color: #1e293b;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-group h2
+{
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.text-group p
+{
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.close-btn
+{
+    border: none;
+    background: #f1f5f9;
+    color: #94a3b8;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+}
+
+/* --- Content Section --- */
+.enhanced-content
+{
+    padding: 0 32px 24px !important;
+}
+
+.form-section-label
+{
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    margin: 12px 0 16px;
+}
+
+.full-width
+{
+    width: 100%;
+}
+
+.helper-box
+{
+    margin-top: 16px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.helper-box mat-icon
+{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #3b82f6;
+}
+
+/* --- Actions --- */
+.custom-actions
+{
+    padding: 24px 32px 32px !important;
+    border-top: 1px solid #f1f5f9;
+    gap: 16px;
+}
+
+.discard-link
+{
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.discard-link:hover
+{
+    color: #1e293b;
+}
+
+/* Material Input Overrides */
+::ng-deep .mat-mdc-text-field-wrapper
+{
+    background-color: #f8fafc !important;
+}
+
+mat-icon[matPrefix]
+{
+    margin-right: 8px;
+    color: #94a3b8;
+    font-size: 20px;
+}

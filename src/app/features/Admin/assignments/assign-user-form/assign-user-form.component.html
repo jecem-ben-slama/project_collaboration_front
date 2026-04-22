@@ -1,12 +1,23 @@
-<div class="dialog-header">
-    <mat-icon color="primary">person_add</mat-icon>
-    <h2 mat-dialog-title>Add Team Member</h2>
+<div class="custom-modal-header">
+    <div class="header-content">
+        <div class="icon-box">
+            <mat-icon>person_add</mat-icon>
+        </div>
+        <div class="text-group">
+            <h2>Assign Team Member</h2>
+            <p>Allocate resources and define project duration</p>
+        </div>
+    </div>
+    <button class="close-btn" (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 
-<mat-dialog-content [formGroup]="assignForm" class="form-container">
+<mat-dialog-content [formGroup]="assignForm" class="enhanced-content">
 
+    <div class="form-section-label">Identity & Selection</div>
     <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Employee</mat-label>
+        <mat-label>Select Employee</mat-label>
         <mat-select formControlName="userId">
             <mat-option *ngFor="let user of users$ | async" [value]="user.id">
                 {{ user.email }}
@@ -14,15 +25,11 @@
         </mat-select>
         <mat-icon matPrefix>badge</mat-icon>
 
-        <mat-error *ngIf="assignForm.get('userId')?.hasError('required')">
-            Employee is required
-        </mat-error>
-
-        <mat-error *ngIf="assignForm.get('userId')?.hasError('duplicate')">
-            This employee is already assigned to this project.
-        </mat-error>
+        <mat-error *ngIf="assignForm.get('userId')?.hasError('required')">Selection is required</mat-error>
+        <mat-error *ngIf="assignForm.get('userId')?.hasError('duplicate')">Already assigned to this project</mat-error>
     </mat-form-field>
 
+    <div class="form-section-label">Assignment Period</div>
     <div class="date-row">
         <mat-form-field appearance="outline">
             <mat-label>Start Date</mat-label>
@@ -30,9 +37,6 @@
                 [matDatepickerFilter]="disablePastDates">
             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
             <mat-datepicker #startPicker></mat-datepicker>
-            <mat-error *ngIf="assignForm.get('startDate')?.hasError('required')">
-                Start date is required
-            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -41,40 +45,28 @@
                 [matDatepickerFilter]="disablePastDates">
             <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
             <mat-datepicker #endPicker></mat-datepicker>
-            <mat-error *ngIf="assignForm.get('endDate')?.hasError('required')">
-                End date is required
-            </mat-error>
-            <mat-error *ngIf="assignForm.get('endDate')?.hasError('dateInvalid')">
-                End date must be after start date
-            </mat-error>
         </mat-form-field>
     </div>
 
-    <div class="leader-section">
-        <div class="leader-text">
-            <span class="title">Project Role</span>
-        </div>
-<mat-button-toggle-group formControlName="teamLeader" class="leader-toggle" aria-label="Role selection">
-    <mat-button-toggle [value]="true">
-        <mat-icon>star</mat-icon>
-        Leader
-    </mat-button-toggle>
-
-    <mat-button-toggle [value]="false">
-        <mat-icon>person</mat-icon>
-        Member
-    </mat-button-toggle>
-</mat-button-toggle-group>
+    <div class="form-section-label">Project Role & Leadership</div>
+    <div class="leader-selection-container">
+        <mat-button-toggle-group formControlName="teamLeader" class="custom-toggle-group">
+            <mat-button-toggle [value]="true">
+                <mat-icon>verified_user</mat-icon>
+                <span>Team Leader</span>
+            </mat-button-toggle>
+            <mat-button-toggle [value]="false">
+                <mat-icon>group</mat-icon>
+                <span>Team Member</span>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+        <p class="helper-text">Leaders have permissions to manage tasks and milestones.</p>
     </div>
 
 </mat-dialog-content>
 
-<mat-divider></mat-divider>
-
-<mat-dialog-actions align="end">
-    <button mat-button (click)="dialogRef.close()" class="cancel-btn">
-        Cancel
-    </button>
+<mat-dialog-actions align="end" class="custom-actions">
+    <button class="discard-link" (click)="dialogRef.close()">Discard</button>
     <app-button label="Assign Member" [disabled]="assignForm.invalid || isSubmitting" (btnClick)="onSubmit()">
     </app-button>
 </mat-dialog-actions>

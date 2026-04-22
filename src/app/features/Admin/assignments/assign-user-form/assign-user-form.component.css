@@ -1,16 +1,70 @@
-.dialog-header
+/* Header Styling */
+.custom-modal-header
+{
+    padding: 32px 32px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content
 {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
-.form-container
+.icon-box
 {
+    background: #eff6ff;
+    color: #3b82f6;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-group h2
+{
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.text-group p
+{
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.close-btn
+{
+    border: none;
+    background: #f1f5f9;
+    color: #94a3b8;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/* Form Sections */
+.enhanced-content
+{
+    padding: 0 32px 24px !important;
+}
+
+.form-section-label
+{
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    margin: 24px 0 12px;
 }
 
 .full-width
@@ -21,7 +75,7 @@
 .date-row
 {
     display: flex;
-    gap: 15px;
+    gap: 16px;
 }
 
 .date-row mat-form-field
@@ -29,32 +83,71 @@
     flex: 1;
 }
 
-.leader-section
+/* Custom Toggle Group */
+.leader-selection-container
 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.leader-text
-{
-    display: flex;
-    flex-direction: column;
-}
-
-.title
-{
-    font-weight: 600;
-}
-
-.subtitle
-{
-    font-size: 12px;
-    color: gray;
-}
-
-.leader-toggle
-{
+    background: #f8fafc;
+    padding: 16px;
     border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.custom-toggle-group
+{
+    width: 100%;
+    border: none !important;
+    gap: 8px;
+}
+
+::ng-deep .custom-toggle-group .mat-button-toggle
+{
+    flex: 1;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    background: white;
+}
+
+::ng-deep .mat-button-toggle-checked
+{
+    background-color: #1e293b !important;
+    color: white !important;
+    border-color: #1e293b !important;
+}
+
+.helper-text
+{
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 12px;
+    margin-left: 4px;
+}
+
+/* Actions */
+.custom-actions
+{
+    padding: 24px 32px 32px !important;
+    border-top: 1px solid #f1f5f9;
+    gap: 16px;
+}
+
+.discard-link
+{
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Material Field Fixes */
+::ng-deep .mat-mdc-text-field-wrapper
+{
+    background-color: #f8fafc !important;
+}
+
+mat-icon[matPrefix]
+{
+    margin-right: 8px;
+    color: #94a3b8;
+    font-size: 20px;
 }

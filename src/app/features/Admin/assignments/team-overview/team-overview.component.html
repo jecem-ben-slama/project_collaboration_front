@@ -1,54 +1,61 @@
 <div class="overview-container">
-    <div class="page-header">
-        <div class="header-text">
-            <h2><mat-icon>hub</mat-icon> Project Teams Dashboard</h2>
-            <p>Manage resource allocation and project staffing at a glance.</p>
+    <div class="header-container">
+        <div class="title-group">
+            <h1>Team Distribution</h1>
+            <p>Managing <strong>{{ filteredProjects.length }}</strong> project teams</p>
+        </div>
+
+        <div class="filter-actions">
+            <div class="search-wrapper">
+                <mat-icon>search</mat-icon>
+                <input type="text" placeholder="Search projects..." (keyup)="onSearch($event)">
+            </div>
+
+            <mat-form-field appearance="outline" class="status-select">
+                <mat-label>Filter Status</mat-label>
+                <mat-select (selectionChange)="onStatusChange($event.value)">
+                    <mat-option value="">All Projects</mat-option>
+                    <mat-option value="IN_PROGRESS">In Progress</mat-option>
+                    <mat-option value="ON_HOLD">On Hold</mat-option>
+                    <mat-option value="COMPLETED">Completed</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
 
-    <div *ngIf="isLoading" class="loader">
-        <mat-spinner diameter="40"></mat-spinner>
+    <div *ngIf="isLoading" class="loader-state">
+        <mat-spinner diameter="32"></mat-spinner>
     </div>
 
     <div class="project-grid" *ngIf="!isLoading">
-        <mat-card *ngFor="let project of projects" class="enhanced-card">
+        <div *ngFor="let project of filteredProjects" class="neo-card" (click)="viewTeamDetails(project)">
             <div class="card-accent" [ngClass]="project.status"></div>
 
-            <mat-card-header>
-                <mat-card-title>{{ project.name || 'Untitled Project' }}</mat-card-title>
-                <mat-card-subtitle>
-                    <span class="status-indicator" [ngClass]="project.status"></span>
-                    {{ project.status | titlecase }}
-                </mat-card-subtitle>
-            </mat-card-header>
+            <div class="card-header">
+                <span class="status-indicator" [ngClass]="project.status"></span>
+                <span class="status-label">{{ project.status.replace('_', ' ') | titlecase }}</span>
+            </div>
 
-            <mat-card-content>
-                <p class="project-brief">{{ project.description | slice:0:80 }}{{ project.description.length > 80 ?
-                    '...' : '' }}</p>
+            <div class="card-body">
+                <h3>{{ project.name }}</h3>
+                <p class="description">{{ project.description }}</p>
+            </div>
 
-                <div class="progress-section">
-                    <div class="label-row">
-                        <span>Team Capacity</span>
-                        <span>{{ project.assignedUsers.length }} Users</span>
-                    </div>
-                    <mat-progress-bar mode="determinate"
-                        [value]="project.status === 'COMPLETED' ? 100 : (project.assignedUsers.length > 0 ? 60 : 10)"
-                        [color]="project.status === 'COMPLETED' ? 'primary' : 'accent'">
-                    </mat-progress-bar>
+            <div class="card-footer">
+                <div class="team-meta">
+                    <mat-icon>group</mat-icon>
+                    <span>{{ project.assignedUsers.length }} Assigned</span>
                 </div>
-            </mat-card-content>
-
-            <mat-divider></mat-divider>
-
-            <mat-card-actions align="end">
-                <button mat-button color="primary" (click)="viewTeamDetails(project)">
-                    <mat-icon>groups</mat-icon> MANAGE TEAM
+                <button class="mini-add-btn" (click)="$event.stopPropagation(); openAssignDialog(project.id)"
+                    matTooltip="Assign Member">
+                    <mat-icon>person_add_alt</mat-icon>
                 </button>
-                <button mat-icon-button class="add-btn" (click)="openAssignDialog(project.id)"
-                    matTooltip="Quick Assign">
-                    <mat-icon>person_add_alt_1</mat-icon>
-                </button>
-            </mat-card-actions>
-        </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && filteredProjects.length === 0" class="empty-results">
+        <mat-icon>search_off</mat-icon>
+        <p>No projects match your current filters.</p>
     </div>
 </div>

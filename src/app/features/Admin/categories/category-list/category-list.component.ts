@@ -5,6 +5,7 @@ import { CategoryService } from '../../../../core/services/category.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -12,6 +13,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = [];
+  filteredCategories: Category[] = []; // Used for the search filter
   displayedColumns: string[] = ['id', 'label', 'actions'];
   isLoading = true;
 
@@ -30,6 +32,7 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
         this.categories = data;
+        this.filteredCategories = data; // Initialize filtered list
         this.isLoading = false;
       },
       error: (err) => {
@@ -37,6 +40,23 @@ export class CategoryListComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value
+      .toLowerCase()
+      .trim();
+
+    if (!filterValue) {
+      this.filteredCategories = this.categories;
+      return;
+    }
+
+    this.filteredCategories = this.categories.filter(
+      (cat) =>
+        cat.label.toLowerCase().includes(filterValue) ||
+        cat.id.toString().includes(filterValue)
+    );
   }
 
   openCategoryForm(category?: Category): void {
@@ -49,6 +69,7 @@ export class CategoryListComponent implements OnInit {
       if (result) this.fetchCategories();
     });
   }
+
   onDelete(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -59,25 +80,24 @@ export class CategoryListComponent implements OnInit {
       },
     });
 
-   dialogRef.afterClosed().subscribe((result) => {
-     if (result) {
-       this.categoryService.deleteCategory(id).subscribe({
-         next: () => {
-           this.notification.showSuccess('Deleted successfully');
-           this.fetchCategories();
-         },
-         error: (err) => {
-           if (err.status === 409) {
-             // This catches your specific backend message
-             this.notification.showError(
-               err.error.message || 'Cannot delete: Item is in use.'
-             );
-           } else {
-             this.notification.showError('An unexpected error occurred.');
-           }
-         },
-       });
-     }
-   });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.categoryService.deleteCategory(id).subscribe({
+          next: () => {
+            this.notification.showSuccess('Deleted successfully');
+            this.fetchCategories();
+          },
+          error: (err) => {
+            if (err.status === 409) {
+              this.notification.showError(
+                err.error.message || 'Cannot delete: Item is in use.'
+              );
+            } else {
+              this.notification.showError('An unexpected error occurred.');
+            }
+          },
+        });
+      }
+    });
   }
 }

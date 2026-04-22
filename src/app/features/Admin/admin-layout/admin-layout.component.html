@@ -4,22 +4,21 @@
         <span class="brand-name">ADMIN PANEL</span>
     </div>
 
-    <span class="spacer"></span>
-
     <div class="user-info" *ngIf="adminEmail">
         <span class="email">{{ adminEmail }}</span>
-    </div>
 
-    <button mat-stroked-button class="logout-btn" (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-    </button>
+        <button mat-stroked-button class="logout-btn" (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+        </button>
+    </div>
 </mat-toolbar>
 
 <mat-sidenav-container class="admin-container">
     <mat-sidenav mode="side" opened class="admin-sidenav">
         <mat-nav-list>
             <div class="nav-section">
+                <div class="section-title">Main Menu</div>
                 <a mat-list-item routerLink="/admin/projects" routerLinkActive="active-link">
                     <mat-icon matListItemIcon>folder_open</mat-icon>
                     <span matListItemTitle>Projects</span>
@@ -36,13 +35,13 @@
                     <mat-icon matListItemIcon>list_alt</mat-icon>
                     <span matListItemTitle>Categories</span>
                 </a>
+
+                <div class="section-title" style="margin-top: 20px;">Settings</div>
                 <a mat-list-item routerLink="/admin/profile" routerLinkActive="active-link">
                     <mat-icon matListItemIcon>manage_accounts</mat-icon>
                     <span matListItemTitle>Profile</span>
                 </a>
             </div>
-
-          
         </mat-nav-list>
     </mat-sidenav>
 

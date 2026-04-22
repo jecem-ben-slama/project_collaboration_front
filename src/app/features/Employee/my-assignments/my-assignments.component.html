@@ -1,67 +1,79 @@
-<div class="bento-wrapper">
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
-
-    <header class="bento-header">
-        <div class="brand-section">
-            <div class="logo-circle">
+<div class="hub-container">
+    <header class="hub-header">
+        <div class="brand-group">
+            <div class="logo-box">
                 <mat-icon>terminal</mat-icon>
             </div>
             <div class="text-group">
-                <span class="user-greeting">Welcome back,</span>
+                <span class="sub-label">Workspace</span>
                 <h1>Project Hub</h1>
             </div>
         </div>
-        <div class="stat-pill">
-            <span class="pulse"></span>
-            <strong>{{ assignments.length }}</strong> Active Engagements
+
+        <div class="filter-actions">
+            <div class="search-wrapper">
+                <mat-icon>search</mat-icon>
+                <input type="text" placeholder="Search projects..." (keyup)="onSearch($event)" />
+            </div>
+
+            <mat-form-field appearance="outline" class="status-select">
+                <mat-label>Status</mat-label>
+                <mat-select (selectionChange)="onStatusChange($event.value)">
+                    <mat-option value="">All Status</mat-option>
+                    <mat-option value="IN_PROGRESS">In Progress</mat-option>
+                    <mat-option value="ON_HOLD">On Hold</mat-option>
+                    <mat-option value="COMPLETED">Completed</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </header>
 
-    <div *ngIf="isLoading" class="skeleton-grid">
-        <div class="skeleton-card" *ngFor="let i of [1,2,3]"></div>
+    <div *ngIf="isLoading" class="loader-state">
+        <mat-spinner diameter="32"></mat-spinner>
     </div>
 
-    <div class="bento-grid" *ngIf="!isLoading">
-        <div class="bento-card" *ngFor="let item of assignments" [ngClass]="item.project.status">
+    <div class="project-grid" *ngIf="!isLoading">
+        <div *ngFor="let item of filteredAssignments" class="project-surface" [ngClass]="item.project.status"
+            (click)="viewTeam(item.project.id)">
+            <div class="surface-accent" [ngClass]="item.project.status"></div>
 
-            <div class="card-top">
-                <div class="role-tag" [class.is-leader]="item.teamLeader">
-                    <mat-icon>{{ item.teamLeader ? 'auto_awesome' : 'person' }}</mat-icon>
-                    {{ item.teamLeader ? 'Lead' : 'Member' }}
+            <div class="surface-header">
+                <div class="role-badge" [class.is-leader]="item.teamLeader">
+                    <mat-icon>{{ item.teamLeader ? 'workspace_premium' : 'person' }}</mat-icon>
+                    <span>{{ item.teamLeader ? 'Team Lead' : 'Member' }}</span>
                 </div>
-                <span class="status-indicator">{{ item.project.status | titlecase }}</span>
+                <div class="status-tag" [ngClass]="item.project.status">
+                    {{ item.project.status.replace('_', ' ') | titlecase }}
+                </div>
             </div>
 
-            <div class="card-body">
-                <h2 class="project-title">{{ item.project.name }}</h2>
-                <p class="project-summary">{{ item.project.description | slice:0:100 }}...</p>
-
-              
+            <div class="surface-body">
+                <h3>{{ item.project.name }}</h3>
+                <p class="summary">{{ item.project.description }}</p>
             </div>
 
-            <div class="card-footer">
-                <div class="time-info">
-                    <div class="time-capsule">
-                        <mat-icon>event</mat-icon>
-                        <span>{{ item.startDate | date:'MMM d YYYY' }}</span>
+            <div class="surface-footer">
+                <div class="timeline-box">
+                    <div class="date-chip">
+                        <mat-icon>calendar_today</mat-icon>
+                        <span>{{ item.startDate | date : 'MMM d' }}</span>
                     </div>
-                    <div class="connector"></div>
-                    <div class="time-capsule">
-                        <span>{{ item.endDate | date:'MMM d YYYY' }}</span>
+                    <mat-icon class="arrow-sep">east</mat-icon>
+                    <div class="date-chip">
+                        <span>{{ item.endDate | date : 'MMM d, YYYY' }}</span>
                     </div>
                 </div>
 
-                <button class="glass-btn" (click)="viewTeam(item.project.id)" matTooltip="Full Team Details">
-                    <mat-icon>open_in_new</mat-icon>
+                <button class="action-circle-btn">
+                    <mat-icon>arrow_forward</mat-icon>
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="empty-state-bento" *ngIf="!isLoading && assignments.length === 0">
-        <div class="empty-icon">📭</div>
-        <h2>All caught up</h2>
-        <p>No active assignments assigned to your profile yet.</p>
+    <div class="empty-hub" *ngIf="!isLoading && filteredAssignments.length === 0">
+        <mat-icon class="empty-icon">search_off</mat-icon>
+        <h2>No assignments found</h2>
+        <p>Try adjusting your search query or status filter.</p>
     </div>
 </div>
