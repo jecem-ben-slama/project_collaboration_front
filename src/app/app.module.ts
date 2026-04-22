@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,11 +36,16 @@ import { CategoryFormComponent } from './features/categories/category-form/categ
 import { ProjectListComponent } from './features/projects/project-list/project-list.component';
 import { ProjectFormComponent } from './features/projects/project-form/project-form.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
-
+import { AppButtonComponent } from './shared/components/app-button/app-button.component';
+import { TeamOverviewComponent } from './features/assignments/team-overview/team-overview.component';
+import { AssignUserFormComponent } from './features/assignments/assign-user-form/assign-user-form.component';
+import { TeamDetailsDialogComponent } from './features/assignments/team-details-dialog/team-details-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
-
-  AppComponent,
+    AppComponent,
     LoginComponent,
     AdminLayoutComponent,
     UserLayoutComponent,
@@ -49,7 +55,11 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
     CategoryFormComponent,
     ProjectListComponent,
     ProjectFormComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AppButtonComponent,
+    TeamOverviewComponent,
+    AssignUserFormComponent,
+    TeamDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +83,10 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
     MatTableModule,
     MatDialogModule,
     MatSelectModule,
+    MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

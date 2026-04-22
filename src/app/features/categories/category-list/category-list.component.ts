@@ -4,6 +4,7 @@ import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../shared/models/category_model';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-category-list',
@@ -17,6 +18,7 @@ export class CategoryListComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
+    private notification: NotificationService,
     private dialog: MatDialog
   ) {}
 
@@ -58,12 +60,25 @@ export class CategoryListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.categoryService
-          .deleteCategory(id)
-          .subscribe(() => this.fetchCategories());
-      }
-    });
+   dialogRef.afterClosed().subscribe((result) => {
+     if (result) {
+       this.categoryService.deleteCategory(id).subscribe({
+         next: () => {
+           this.notification.showSuccess('Deleted successfully');
+           this.fetchCategories();
+         },
+         error: (err) => {
+           if (err.status === 409) {
+             // This catches your specific backend message
+             this.notification.showError(
+               err.error.message || 'Cannot delete: Item is in use.'
+             );
+           } else {
+             this.notification.showError('An unexpected error occurred.');
+           }
+         },
+       });
+     }
+   });
   }
 }

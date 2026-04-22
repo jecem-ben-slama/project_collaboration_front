@@ -1,0 +1,22 @@
+.full-width
+{
+    width: 100%;
+}
+
+.button-content
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-spinner
+{
+    margin-right: 5px;
+}
+
+.loading-text
+{
+    margin-left: 5px;
+}

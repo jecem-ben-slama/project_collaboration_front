@@ -4,6 +4,7 @@ import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../shared/models/user_model';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-user-list',
@@ -17,7 +18,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private dialog: MatDialog // Inject MatDialog
+    private dialog: MatDialog,
+    private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -65,12 +67,25 @@ export class UserListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.userService
-          .deleteUser(id)
-          .subscribe(() => this.fetchUsers());
-      }
-    });
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          this.notification.showSuccess('Deleted successfully');
+          this.fetchUsers();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            // This catches your specific backend message
+            this.notification.showError(
+              err.error.message || 'Cannot delete: Item is in use.'
+            );
+          } else {
+            this.notification.showError('An unexpected error occurred.');
+          }
+        },
+      });
+    }
+  });
   }
 }

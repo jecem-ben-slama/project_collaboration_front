@@ -2,3 +2,35 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Error Snackbar - Floating Red Design */
+.error-snackbar
+{
+    background: #f44336 !important;
+    /* Material Red 500 */
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3) !important;
+    margin-top: 20px !important;
+    /* Gives it the "floating" feel from the top */
+}
+
+.error-snackbar .mat-mdc-snack-bar-label
+{
+    font-weight: 500;
+}
+
+.error-snackbar .mat-mdc-button
+{
+    color: white !important;
+}
+
+/* Success Snackbar - Floating Green Design */
+.success-snackbar
+{
+    background: #4caf50 !important;
+    /* Material Green 500 */
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
+    margin-top: 20px !important;
+}

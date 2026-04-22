@@ -1,0 +1,54 @@
+<div class="overview-container">
+    <div class="page-header">
+        <div class="header-text">
+            <h2><mat-icon>hub</mat-icon> Project Teams Dashboard</h2>
+            <p>Manage resource allocation and project staffing at a glance.</p>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading" class="loader">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <div class="project-grid" *ngIf="!isLoading">
+        <mat-card *ngFor="let project of projects" class="enhanced-card">
+            <div class="card-accent" [ngClass]="project.status"></div>
+
+            <mat-card-header>
+                <mat-card-title>{{ project.name || 'Untitled Project' }}</mat-card-title>
+                <mat-card-subtitle>
+                    <span class="status-indicator" [ngClass]="project.status"></span>
+                    {{ project.status | titlecase }}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <p class="project-brief">{{ project.description | slice:0:80 }}{{ project.description.length > 80 ?
+                    '...' : '' }}</p>
+
+                <div class="progress-section">
+                    <div class="label-row">
+                        <span>Team Capacity</span>
+                        <span>{{ project.assignedUsers.length }} Users</span>
+                    </div>
+                    <mat-progress-bar mode="determinate"
+                        [value]="project.status === 'COMPLETED' ? 100 : (project.assignedUsers.length > 0 ? 60 : 10)"
+                        [color]="project.status === 'COMPLETED' ? 'primary' : 'accent'">
+                    </mat-progress-bar>
+                </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-actions align="end">
+                <button mat-button color="primary" (click)="viewTeamDetails(project)">
+                    <mat-icon>groups</mat-icon> MANAGE TEAM
+                </button>
+                <button mat-icon-button class="add-btn" (click)="openAssignDialog(project.id)"
+                    matTooltip="Quick Assign">
+                    <mat-icon>person_add_alt_1</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

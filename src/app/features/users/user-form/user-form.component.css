@@ -16,3 +16,22 @@ mat-dialog-actions
 {
     padding-bottom: 20px !important;
 }
+.form-layout
+{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    min-width: 450px;
+}
+
+.form-row
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.full-width
+{
+    width: 100%;
+}

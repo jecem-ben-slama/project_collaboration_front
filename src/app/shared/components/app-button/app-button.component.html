@@ -1,0 +1,12 @@
+<button mat-raised-button [color]="color" [type]="type" [disabled]="disabled || loading" [class.full-width]="fullWidth"
+    (click)="onClick()">
+
+    <div class="button-content">
+        <mat-spinner *ngIf="loading" diameter="20" class="btn-spinner"></mat-spinner>
+
+        <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+
+        <span *ngIf="!loading">{{ label }}</span>
+        <span *ngIf="loading" class="loading-text">Please wait...</span>
+    </div>
+</button>

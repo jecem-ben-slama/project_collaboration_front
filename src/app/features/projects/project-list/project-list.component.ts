@@ -4,6 +4,7 @@ import { ProjectService } from '../../../core/services/project.service';
 import { Project } from '../../../shared/models/project_model';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-project-list',
@@ -16,7 +17,8 @@ export class ProjectListComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notification: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -53,12 +55,23 @@ export class ProjectListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.projectService
-          .deleteProject(id)
-          .subscribe(() => this.fetchProjects());
-      }
-    });
-  }
+ dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.projectService.deleteProject(id).subscribe({
+        next: () => {
+          this.notification.showSuccess('Deleted successfully');
+          this.fetchProjects();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            // This catches your specific backend message
+            this.notification.showError(err.error.message || 'Cannot delete: Item is in use.');
+          } else {
+            this.notification.showError('An unexpected error occurred.');
+          }
+        }
+      });
+    }
+  });
+}
 }
