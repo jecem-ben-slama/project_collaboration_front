@@ -1,0 +1,85 @@
+<div class="dashboard-container" *ngIf="!isLoading">
+    <div class="metrics-grid">
+        <div class="m-card">
+            <mat-icon class="icon">rocket_launch</mat-icon>
+            <div class="content">
+                <p>Projects</p>
+                <h3>{{ stats.totalProjects }}</h3>
+            </div>
+        </div>
+        <div class="m-card">
+            <mat-icon class="icon blue">badge</mat-icon>
+            <div class="content">
+                <p>Employees</p>
+                <h3>{{ stats.totalEmployees }}</h3>
+            </div>
+        </div>
+        <div class="m-card">
+            <mat-icon class="icon green">history_edu</mat-icon>
+            <div class="content">
+                <p>Notes</p>
+                <h3>{{ stats.totalNotes }}</h3>
+            </div>
+        </div>
+        <div class="m-card">
+            <mat-icon class="icon gold">groups</mat-icon>
+            <div class="content">
+                <p>Avg Team</p>
+                <h3>{{ stats.avgTeamSize }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="left-col">
+            <div class="surface-card">
+                <div class="card-header">
+                    <h3>Project Growth & Journal Activity</h3>
+                </div>
+                <div class="charts-split">
+                    <div class="chart-box">
+                        <canvas baseChart [data]="barChartData" [options]="chartOptions" [type]="'bar'"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas baseChart [data]="lineChartData" [options]="chartOptions" [type]="'line'"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="surface-card">
+                <div class="card-header">
+                    <h3>Journaling Engagement (Notes per User)</h3>
+                </div>
+                <div class="user-notes-grid">
+                    <div class="user-note-stat" *ngFor="let item of stats.notesPerUser | keyvalue">
+                        <div class="user-info">
+                            <span class="u-name">{{ item.key }}</span>
+                            <span class="u-count">{{ item.value }} notes</span>
+                        </div>
+                        <div class="mini-bar-bg">
+                            <div class="mini-bar-fill" [style.width.%]="(item.value / stats.totalNotes) * 100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="surface-card full-height">
+                <div class="card-header">
+                    <h3>Top Contributors</h3>
+                    <mat-icon class="gold">workspace_premium</mat-icon>
+                </div>
+                <div class="contributor-list">
+                    <div class="contributor-row" *ngFor="let person of stats.topContributors; let i = index">
+                        <div class="rank" [class.first]="i === 0">#{{ i + 1 }}</div>
+                        <div class="details">
+                            <p class="name">{{ person.userName }}</p>
+                            <p class="meta">{{ person.assignmentCount }} Assignments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

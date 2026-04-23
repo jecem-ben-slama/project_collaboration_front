@@ -52,6 +52,9 @@ import { ProjectNotesComponent } from './features/Employee/project-notes/project
 import { ProfileComponent } from './features/auth/profile/profile.component';
 import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
+import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +78,7 @@ import { ResetPasswordComponent } from './features/auth/reset-password/reset-pas
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +109,7 @@ import { ResetPasswordComponent } from './features/auth/reset-password/reset-pas
     MatTooltipModule,
     MatMenuModule,
     MatCheckboxModule,
+    NgChartsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

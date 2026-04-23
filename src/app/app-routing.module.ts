@@ -14,6 +14,7 @@ import { CategoryListComponent } from './features/Admin/categories/category-list
 import { ProjectNotesComponent } from './features/Employee/project-notes/project-notes.component';
 import { MyAssignmentsComponent } from './features/Employee/my-assignments/my-assignments.component';
 import { UserLayoutComponent } from './features/Employee/user-layout/user-layout.component';
+import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { roles: ['ADMIN'] },
     children: [
+      {path: 'dashboard', component: DashboardComponent},
        { path: 'projects', component: ProjectListComponent },
       { path: 'users', component: UserListComponent },
       {path: 'categories', component: CategoryListComponent},
