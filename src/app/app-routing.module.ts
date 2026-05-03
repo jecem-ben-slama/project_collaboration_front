@@ -20,30 +20,41 @@ import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized
 //* Standard Routes: require no auth
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
 
+  //* ADMIN ROUTES
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [authGuard],
-    data: { roles: ['ADMIN'] }, // Matches 'roles' in Guard
+    data: { roles: ['ADMIN'] },
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'projects', component: ProjectListComponent },
+      { path: 'users', component: UserListComponent },
+      { path: 'categories', component: CategoryListComponent },
+      { path: 'assignments', component: TeamOverviewComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
 
+  //* USER ROUTES
   {
     path: 'user',
     component: UserLayoutComponent,
     canActivate: [authGuard],
-    data: { roles: ['EMPLOYEE'] }, // Matches 'roles' in Guard
+    data: { roles: ['EMPLOYEE'] },
     children: [
       { path: 'projects', component: MyAssignmentsComponent },
+      { path: 'notes', component: ProjectNotesComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: '', redirectTo: 'projects', pathMatch: 'full' },
     ],
   },
+  { path: 'unauthorized', component: UnauthorizedComponent },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
