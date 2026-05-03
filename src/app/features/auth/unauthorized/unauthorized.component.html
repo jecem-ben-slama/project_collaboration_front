@@ -1,23 +1,30 @@
-<div class="unauthorized-wrapper">
-    <div class="unauthorized-card">
-        <!-- Visual cue using Material Icons -->
-        <div class="icon-container">
-            <mat-icon>gpp_maybe</mat-icon>
-        </div>
+<div class="unauthorized-container">
+    <!-- Decorative background elements to enhance the 'Glass' look -->
+    <div class="blur-circle circle-1"></div>
+    <div class="blur-circle circle-2"></div>
 
-        <h1>403</h1>
-        <h2>Access Denied</h2>
+    <mat-card class="unauthorized-card glass-effect">
+        <mat-card-content>
+            <div class="icon-header">
+                <div class="icon-bg">
+                    <mat-icon>shield_lock</mat-icon>
+                </div>
+            </div>
 
-        <p>
-            It looks like you don't have the necessary permissions to access this workspace.
-            Please contact your administrator if you believe this is a mistake.
-        </p>
+            <h1 class="error-code">403</h1>
+            <h2 class="error-title">Access Denied</h2>
 
-        <div class="action-area">
-            <a routerLink="/login" class="btn-primary">
-                <mat-icon>arrow_back</mat-icon>
-                Return to Login
-            </a>
-        </div>
-    </div>
+            <p class="error-message">
+                You do not have the required permissions to view this workspace.
+                If you believe this is an error, please contact your system administrator.
+            </p>
+
+            <div class="action-wrapper">
+                <button (click)="goBack()" class="back-btn">
+                    <mat-icon>arrow_back</mat-icon>
+                    <span>{{ authService.isLoggedIn() ? 'Go to Dashboard' : 'Back to Login' }}</span>
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

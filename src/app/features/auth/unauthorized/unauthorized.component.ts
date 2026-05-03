@@ -1,20 +1,28 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { MatIconModule } from '@angular/material/icon';
-
 
 @Component({
   selector: 'app-unauthorized',
   templateUrl: './unauthorized.component.html',
+  styleUrls: ['./unauthorized.component.css'],
 })
 export class UnauthorizedComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  // Making authService public so we can use it in the HTML template
+  constructor(public authService: AuthService, private router: Router) {}
 
-  goBack() {
-    const role = this.authService.getUserRole(); // adjust to your method
-    if (role === 'ADMIN') this.router.navigate(['/admin/dashboard']);
-    else if (role === 'EMPLOYEE') this.router.navigate(['/user/projects']);
-    else this.router.navigate(['/login']);
+  goBack(): void {
+    if (this.authService.isLoggedIn()) {
+      const role = this.authService.getUserRole();
+      // Send them back to their specific workspace
+      if (role === 'ADMIN') {
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        this.router.navigate(['/user/projects']);
+      }
+    } else {
+      // If session expired or they aren't logged in, send to login
+      this.router.navigate(['/login']);
+    }
   }
 }

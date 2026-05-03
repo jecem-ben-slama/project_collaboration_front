@@ -16,13 +16,25 @@ import { MyAssignmentsComponent } from './features/Employee/my-assignments/my-as
 import { UserLayoutComponent } from './features/Employee/user-layout/user-layout.component';
 import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboard.component';
 import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
+import { guestGuard } from './core/guards/guest.guard';
 
 //* Standard Routes: require no auth
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  },
 
   //* ADMIN ROUTES
   {

@@ -21,6 +21,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    if (this.authService.isLoggedIn()) {
+      const role = this.authService.getUserRole();
+      const target = role === 'ADMIN' ? '/admin/dashboard' : '/user/projects';
+      this.router.navigate([target]);
+    }
+    this.initForm();
     this.initForm();
   }
 
