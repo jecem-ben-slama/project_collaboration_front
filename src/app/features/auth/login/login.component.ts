@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         // Adjusted navigation to standard routes
         if (response.role === 'ADMIN') {
-          this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['/user/projects']);
         }

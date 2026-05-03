@@ -1,0 +1,99 @@
+:host
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /* Centers the card vertically in the workspace */
+    background-color: #fdfdfd;
+}
+
+.unauthorized
+{
+    background: white;
+    border: 2px solid #eef2f6;
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 403 Title Style */
+.unauthorized h1
+{
+    font-size: 3rem;
+    font-weight: 900;
+    color: #1e293b;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+/* Description Text */
+.unauthorized p
+{
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 32px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* The "Go Back" Button - Styled like your primary actions */
+.unauthorized a
+{
+    display: inline-block;
+    background-color: #18181b;
+    /* Matching your dark theme accents */
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(24, 24, 27, 0.2);
+}
+
+.unauthorized a:hover
+{
+    transform: translateY(-2px);
+    background-color: #3f3f46;
+    box-shadow: 0 6px 15px rgba(24, 24, 27, 0.3);
+}
+
+.unauthorized a:active
+{
+    transform: translateY(0);
+}
+
+/* Subtle Entrance Animation */
+@keyframes fadeIn
+{
+    from
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Friendly Adjustments */
+@media (max-width: 480px)
+{
+    .unauthorized
+    {
+        margin: 20px;
+        padding: 32px 24px;
+    }
+
+    .unauthorized h1
+    {
+        font-size: 2.2rem;
+    }
+}

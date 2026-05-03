@@ -119,6 +119,7 @@ export class AuthService {
 
     localStorage.setItem('token', authResponse.token || '');
     localStorage.setItem('email', authResponse.email || '');
+    localStorage.setItem('role',authResponse.role||'');
 
     if (idValue !== undefined && idValue !== null) {
       localStorage.setItem('userId', idValue.toString());
@@ -156,6 +157,9 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+  getUserRole():string|null {
+    return localStorage.getItem('role');
   }
 
   logout(): void {

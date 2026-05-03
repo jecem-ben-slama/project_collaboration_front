@@ -54,6 +54,7 @@ import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-
 import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
 import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboard.component';
 import { NgChartsModule } from 'ng2-charts';
+import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { NgChartsModule } from 'ng2-charts';
     ResetPasswordComponent,
     ProfileComponent,
     DashboardComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,

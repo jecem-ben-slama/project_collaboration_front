@@ -15,30 +15,33 @@ import { ProjectNotesComponent } from './features/Employee/project-notes/project
 import { MyAssignmentsComponent } from './features/Employee/my-assignments/my-assignments.component';
 import { UserLayoutComponent } from './features/Employee/user-layout/user-layout.component';
 import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboard.component';
+import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
 
-
+//* Standard Routes: require no auth
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-{path:'forgot-password', component: ForgotPasswordComponent},
-{path:'reset-password', component: ResetPasswordComponent},
-  // ADMIN ROUTES
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent }, 
+
+  //* ADMIN ROUTES
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [authGuard],
     data: { roles: ['ADMIN'] },
     children: [
-      {path: 'dashboard', component: DashboardComponent},
-       { path: 'projects', component: ProjectListComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'projects', component: ProjectListComponent },
       { path: 'users', component: UserListComponent },
-      {path: 'categories', component: CategoryListComponent},
+      { path: 'categories', component: CategoryListComponent },
       { path: 'assignments', component: TeamOverviewComponent },
       { path: 'profile', component: ProfileComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
 
-  // USER ROUTES
+  //* USER ROUTES
   {
     path: 'user',
     component: UserLayoutComponent,
@@ -47,7 +50,7 @@ const routes: Routes = [
     children: [
       { path: 'projects', component: MyAssignmentsComponent },
       { path: 'notes', component: ProjectNotesComponent },
-      {path: 'profile', component: ProfileComponent},
+      { path: 'profile', component: ProfileComponent },
       { path: '', redirectTo: 'projects', pathMatch: 'full' },
     ],
   },

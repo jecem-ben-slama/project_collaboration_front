@@ -23,6 +23,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     });
     return false;
   }
+   if (!authService.hasRole(allowedRoles)) {
+     return router.createUrlTree(['/unauthorized']);
+   }
 
   return true;
 };
