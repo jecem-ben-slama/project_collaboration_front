@@ -11,7 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
-  errorMessage: string | null = null;
+  errorMessage = '';
   hidePassword = true;
 
   constructor(
@@ -21,26 +21,28 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  private initForm(): void {
     this.loginForm = this.fb.group({
-      // Ensure these match the formControlName in HTML
+      // Matching the placeholders usually used at IIT Sfax
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onLogin(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+    if (this.loginForm.invalid) return;
 
     this.loading = true;
-    this.errorMessage = null;
+    this.errorMessage = '';
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.loading = false;
-        // Adjusted navigation to standard routes
+
+        // Use the role from the response to determine the landing page
         if (response.role === 'ADMIN') {
           this.router.navigate(['/admin/dashboard']);
         } else {
@@ -49,7 +51,8 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err.error?.message || 'Invalid email or password.';
+        this.errorMessage = 'Invalid email or password. Please try again.';
+        console.error('Login failed', err);
       },
     });
   }

@@ -111,40 +111,44 @@ export class AuthService {
       { responseType: 'text' } // <--- This tells Angular not to look for JSON
     );
   }
-
-  // --- Session & RBAC Helpers ---
-
   private saveSession(authResponse: AuthResponse): void {
-    const idValue = authResponse.userId ?? (authResponse as any).id;
-
     localStorage.setItem('token', authResponse.token || '');
     localStorage.setItem('email', authResponse.email || '');
-    localStorage.setItem('role',authResponse.role||'');
+    localStorage.setItem('role', authResponse.role || ''); // Critical for Guard
 
-    if (idValue !== undefined && idValue !== null) {
-      localStorage.setItem('userId', idValue.toString());
-    }
+    const idValue = authResponse.userId ?? (authResponse as any).id;
+    if (idValue) localStorage.setItem('userId', idValue.toString());
 
-    // Refresh the BehaviorSubject after login
     this.currentUserSubject.next(this.getUserFromStorage());
+  }
+
+  hasRole(allowedRoles: string[]): boolean {
+    const userRole = this.getUserRole();
+    return userRole ? allowedRoles.includes(userRole) : false;
   }
 
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-
-  hasRole(allowedRoles: string[]): boolean {
-    const email = this.getEmail();
-    if (!email) return false;
-
-    // Logic: admin@jee.com is the ADMIN, others are EMPLOYEE
-    const userRole = email === 'admin@jee.com' ? 'ADMIN' : 'EMPLOYEE';
-    return allowedRoles.includes(userRole);
-  }
-
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.currentUserSubject.next(null);
+  }
+
+
+  // --- Session & RBAC Helpers ---
+
+
+
+
+
 
   getEmail(): string | null {
     return localStorage.getItem('email');
@@ -158,12 +162,5 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
-  getUserRole():string|null {
-    return localStorage.getItem('role');
-  }
 
-  logout(): void {
-    localStorage.clear();
-    this.currentUserSubject.next(null); // Clear the reactive state
-  }
 }
