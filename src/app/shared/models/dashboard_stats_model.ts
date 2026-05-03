@@ -11,6 +11,6 @@ export interface DashboardStats {
   projectsByStatus: { [key: string]: number };
   topContributors: TopContributor[];
   projectTrends: { [month: string]: number };
-  noteTrends: { [date: string]: number }; // Daily activity trend
-  notesPerUser: { [user: string]: number }; // User documentation engagement
+  noteTrends: { [date: string]: number }; 
+  notesPerUser: { [user: string]: number };
 }

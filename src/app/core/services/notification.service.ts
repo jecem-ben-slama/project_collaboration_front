@@ -10,7 +10,7 @@ export class NotificationService {
       duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      panelClass: ['error-snackbar'], // We will style this in a second
+      panelClass: ['error-snackbar'], 
     });
   }
 

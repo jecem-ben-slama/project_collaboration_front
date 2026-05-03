@@ -12,12 +12,10 @@ export class NoteService {
 
   constructor(private http: HttpClient) {}
 
-  // POST /add - Add a note to a project
   addNote(noteData: any): Observable<Note> {
     return this.http.post<Note>(`${this.API_URL}/add`, noteData);
   }
 
-  // GET /project/:projectId - Get all notes for a project
   getNotesByProjectId(projectId: number): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.API_URL}/project/${projectId}`);
   }

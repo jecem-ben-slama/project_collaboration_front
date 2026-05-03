@@ -108,13 +108,13 @@ export class AuthService {
     return this.http.post(
       `${this.API_URL}/users/reset-password`,
       resetData,
-      { responseType: 'text' } // <--- This tells Angular not to look for JSON
+      { responseType: 'text' } 
     );
   }
   private saveSession(authResponse: AuthResponse): void {
     localStorage.setItem('token', authResponse.token || '');
     localStorage.setItem('email', authResponse.email || '');
-    localStorage.setItem('role', authResponse.role || ''); // Critical for Guard
+    localStorage.setItem('role', authResponse.role || '');
 
     const idValue = authResponse.userId ?? (authResponse as any).id;
     if (idValue) localStorage.setItem('userId', idValue.toString());

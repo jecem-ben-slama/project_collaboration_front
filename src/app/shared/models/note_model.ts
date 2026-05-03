@@ -1,9 +1,9 @@
 export interface Note {
   id: number;
   projectId: number;
-  userId: number; // Matches Postman
-  userEmail: string; // Matches Postman
-  userName: string; // Matches Postman
+  userId: number; 
+  userEmail: string; 
+  userName: string; 
   content: string;
   createdAt: string;
   updatedAt?: string;

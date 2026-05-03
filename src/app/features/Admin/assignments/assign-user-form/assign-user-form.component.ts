@@ -19,7 +19,7 @@ import { NotificationService } from '../../../../core/services/notification.serv
 })
 export class AssignUserFormComponent implements OnInit {
   assignForm!: FormGroup;
-  users$ = this.userService.getAllUsers();
+  users$ = this.userService.getEmployees();
   isSubmitting = false;
   isEditMode = false;
   today = new Date();
