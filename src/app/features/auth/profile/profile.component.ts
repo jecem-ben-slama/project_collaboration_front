@@ -3,17 +3,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../core/services/user.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { AuthService } from '../../../core/services/auth.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  // Initialize with nulls to prevent template errors
-  user: any = { name: '', email: '', password: '', categoryId: null };
+  user: any = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    categoryId: null,
+  };
   categories: any[] = [];
   isLoading = true;
   isSaving = false;
+
+  // Show/Hide Password State
+  hidePassword = true;
+  hideConfirmPassword = true;
 
   constructor(
     private userService: UserService,
@@ -23,13 +33,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 1. Load categories first so they are ready for the user data
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('Categories synced:', this.categories);
-
-        // 2. Only load the profile after categories are fetched
         const id = this.authService.getUserId();
         if (id) this.loadUserProfile(id);
       },
@@ -47,9 +53,9 @@ export class ProfileComponent implements OnInit {
       next: (data) => {
         this.user = {
           ...data,
-          // Ensure categoryId is a Number for strict comparison
-          categoryId: Number(data.categoryId), 
+          categoryId: Number(data.categoryId),
           password: '',
+          confirmPassword: '', // Initialize empty
         };
         this.isLoading = false;
       },
@@ -57,8 +63,14 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  // Getter to check mismatch for the template
+  get passwordsMismatch(): boolean {
+    if (!this.user.password && !this.user.confirmPassword) return false;
+    return this.user.password !== this.user.confirmPassword;
+  }
+
   onUpdateProfile() {
-    if (!this.user.name || !this.user.email) return;
+    if (!this.user.name || !this.user.email || this.passwordsMismatch) return;
 
     this.isSaving = true;
     const payload = {
@@ -71,6 +83,8 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.user.id, payload).subscribe({
       next: (res) => {
         this.authService.updateCurrentUser(res);
+        this.user.password = ''; // Reset fields after success
+        this.user.confirmPassword = '';
         this.isSaving = false;
         this.snackBar.open('Profile updated successfully!', 'Close', {
           duration: 3000,

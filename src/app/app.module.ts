@@ -56,6 +56,7 @@ import { DashboardComponent } from './features/Admin/dashboard/dashboard/dashboa
 import { NgChartsModule } from 'ng2-charts';
 import { UnauthorizedComponent } from './features/auth/unauthorized/unauthorized.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

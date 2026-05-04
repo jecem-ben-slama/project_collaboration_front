@@ -35,18 +35,41 @@
 
                 <div class="form-section-label">Security & Access</div>
 
-                <div class="field-box password-field">
-                    <label>New Password</label>
-                    <div class="input-wrapper">
-                        <mat-icon>lock_outline</mat-icon>
-                        <input type="password" [(ngModel)]="user.password" name="password"
-                            placeholder="Leave blank to keep current password">
+                <div class="field-grid">
+                    <!-- New Password -->
+                    <div class="field-box">
+                        <label>New Password</label>
+                        <div class="input-wrapper">
+                            <mat-icon>lock_outline</mat-icon>
+                            <input [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="user.password"
+                                name="password" placeholder="Leave blank to keep current" minlength="8">
+                            <button type="button" class="visibility-toggle" (click)="hidePassword = !hidePassword">
+                                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <span class="helper-text">Ensure your password is at least 8 characters long.</span>
+
+                    <!-- Confirm Password -->
+                    <div class="field-box">
+                        <label>Confirm New Password</label>
+                        <div class="input-wrapper" [class.error-border]="passwordsMismatch">
+                            <mat-icon>lock_reset</mat-icon>
+                            <input [type]="hideConfirmPassword ? 'password' : 'text'" [(ngModel)]="user.confirmPassword"
+                                name="confirmPassword" placeholder="Repeat new password">
+                            <button type="button" class="visibility-toggle"
+                                (click)="hideConfirmPassword = !hideConfirmPassword">
+                                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </div>
+                        <span class="error-text" *ngIf="passwordsMismatch">Passwords do not match.</span>
+                    </div>
                 </div>
 
+                <span class="helper-text">Ensure your password is at least 8 characters long if changing.</span>
+
                 <div class="form-footer">
-                    <button type="submit" class="primary-action-btn" [disabled]="profileForm.invalid || isSaving">
+                    <button type="submit" class="primary-action-btn"
+                        [disabled]="profileForm.invalid || isSaving || passwordsMismatch">
                         <mat-spinner diameter="20" color="accent" *ngIf="isSaving"></mat-spinner>
                         <span>{{ isSaving ? 'Updating...' : 'Save Profile Changes' }}</span>
                     </button>

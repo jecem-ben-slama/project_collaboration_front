@@ -1,4 +1,3 @@
-/* --- Header Styling --- */
 .custom-modal-header
 {
     padding: 32px 32px 24px;
@@ -19,7 +18,6 @@
     height: 48px;
     font-size: 48px;
     color: #4f46e5;
-    /* Indigo Theme */
 }
 
 .text-group h2
@@ -28,7 +26,6 @@
     font-size: 1.5rem;
     font-weight: 800;
     color: #0f172a;
-    letter-spacing: -0.025em;
 }
 
 .text-group p
@@ -38,28 +35,6 @@
     font-size: 0.875rem;
 }
 
-.close-btn
-{
-    background: #f1f5f9;
-    border: none;
-    color: #94a3b8;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-}
-
-.close-btn:hover
-{
-    background: #e2e8f0;
-    color: #0f172a;
-}
-
-/* --- Form Body --- */
 .enhanced-content
 {
     padding: 0 32px 24px !important;
@@ -92,24 +67,25 @@
     width: 100%;
 }
 
-/* Material Override for Modern Look */
-::ng-deep .mat-mdc-text-field-wrapper
+.field-disabled
 {
-    background-color: #f8fafc !important;
-    /* Soft Slate background */
+    opacity: 0.7;
 }
 
-::ng-deep .mat-mdc-form-field-focus-overlay
+/* Visibility button styling */
+button[mat-icon-button]
 {
-    background-color: transparent !important;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 }
 
-::ng-deep .mat-mdc-form-field-outline
+button[mat-icon-button] mat-icon
 {
-    color: #e2e8f0 !important;
+    color: #94a3b8;
+    font-size: 20px;
 }
 
-/* --- Actions Bar --- */
 .custom-actions
 {
     padding: 24px 32px 32px !important;
@@ -124,19 +100,15 @@
     color: #94a3b8;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: color 0.2s;
 }
 
-.cancel-link:hover
-{
-    color: #0f172a;
-    text-decoration: underline;
-}
-
-/* Icon soft color */
+/* Fix for icons blocking input clicks */
 mat-icon[matSuffix]
 {
-    color: #cbd5e1;
-    font-size: 20px;
+    pointer-events: none;
+}
+
+button[matSuffix]
+{
+    pointer-events: auto !important;
 }

@@ -210,3 +210,53 @@
     padding: 100px 0;
     text-align: center;
 }
+.input-wrapper
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.visibility-toggle
+{
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.visibility-toggle:hover
+{
+    color: #4f46e5;
+}
+
+.visibility-toggle mat-icon
+{
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Error Styling */
+.error-text
+{
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+}
+
+.error-border
+{
+    border-color: #ef4444 !important;
+}
+
+.primary-action-btn:disabled
+{
+    opacity: 0.6;
+    cursor: not-allowed;
+}
